@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Hashing;
+namespace Hedi\Sentinel\Hashing;
 
 trait Hasher
 {

@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Cookies;
+namespace Hedi\Sentinel\Cookies;
 
 use Illuminate\Http\Request;
 use Illuminate\Cookie\CookieJar;

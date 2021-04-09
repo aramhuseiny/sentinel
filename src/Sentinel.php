@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel;
+namespace Hedi\Sentinel;
 
 use Closure;
 use RuntimeException;
@@ -26,15 +26,15 @@ use BadMethodCallException;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Cartalyst\Support\Traits\EventTrait;
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 use Illuminate\Contracts\Events\Dispatcher;
-use Cartalyst\Sentinel\Roles\RoleRepositoryInterface;
-use Cartalyst\Sentinel\Users\UserRepositoryInterface;
-use Cartalyst\Sentinel\Checkpoints\CheckpointInterface;
-use Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface;
-use Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface;
-use Cartalyst\Sentinel\Activations\ActivationRepositoryInterface;
-use Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface;
+use Hedi\Sentinel\Roles\RoleRepositoryInterface;
+use Hedi\Sentinel\Users\UserRepositoryInterface;
+use Hedi\Sentinel\Checkpoints\CheckpointInterface;
+use Hedi\Sentinel\Reminders\ReminderRepositoryInterface;
+use Hedi\Sentinel\Throttling\ThrottleRepositoryInterface;
+use Hedi\Sentinel\Activations\ActivationRepositoryInterface;
+use Hedi\Sentinel\Persistences\PersistenceRepositoryInterface;
 
 class Sentinel
 {
@@ -43,49 +43,49 @@ class Sentinel
     /**
      * The current cached, logged in user.
      *
-     * @var \Cartalyst\Sentinel\Users\UserInterface
+     * @var \Hedi\Sentinel\Users\UserInterface
      */
     protected $user;
 
     /**
      * The Persistences repository instance.
      *
-     * @var \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface
+     * @var \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface
      */
     protected $persistences;
 
     /**
      * The Users repository instance.
      *
-     * @var \Cartalyst\Sentinel\Users\UserRepositoryInterface
+     * @var \Hedi\Sentinel\Users\UserRepositoryInterface
      */
     protected $users;
 
     /**
      * The Roles repository instance.
      *
-     * @var \Cartalyst\Sentinel\Roles\RoleRepositoryInterface
+     * @var \Hedi\Sentinel\Roles\RoleRepositoryInterface
      */
     protected $roles;
 
     /**
      * The Activations repository instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface
+     * @var \Hedi\Sentinel\Activations\ActivationRepositoryInterface
      */
     protected $activations;
 
     /**
      * The Reminders repository.
      *
-     * @var \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface
+     * @var \Hedi\Sentinel\Reminders\ReminderRepositoryInterface
      */
     protected $reminders;
 
     /**
      * The Throttling repository instance.
      *
-     * @var \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface
+     * @var \Hedi\Sentinel\Throttling\ThrottleRepositoryInterface
      */
     protected $throttle;
 
@@ -127,10 +127,10 @@ class Sentinel
     /**
      * Constructor.
      *
-     * @param \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
-     * @param \Cartalyst\Sentinel\Users\UserRepositoryInterface               $users
-     * @param \Cartalyst\Sentinel\Roles\RoleRepositoryInterface               $roles
-     * @param \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface   $activations
+     * @param \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
+     * @param \Hedi\Sentinel\Users\UserRepositoryInterface               $users
+     * @param \Hedi\Sentinel\Roles\RoleRepositoryInterface               $roles
+     * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface   $activations
      * @param \Illuminate\Contracts\Events\Dispatcher                         $dispatcher
      *
      * @return void
@@ -162,7 +162,7 @@ class Sentinel
      *
      * @throws \InvalidArgumentException
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function register(array $credentials, $callback = false)
     {
@@ -196,7 +196,7 @@ class Sentinel
      *
      * @param array $credentials
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function registerAndActivate(array $credentials)
     {
@@ -240,7 +240,7 @@ class Sentinel
     /**
      * Checks to see if a user is logged in.
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function check()
     {
@@ -266,7 +266,7 @@ class Sentinel
     /**
      * Checks to see if a user is logged in, bypassing checkpoints.
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function forceCheck()
     {
@@ -288,11 +288,11 @@ class Sentinel
     /**
      * Authenticates a user, with "remember" flag.
      *
-     * @param array|\Cartalyst\Sentinel\Users\UserInterface $credentials
+     * @param array|\Hedi\Sentinel\Users\UserInterface $credentials
      * @param bool                                          $remember
      * @param bool                                          $login
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function authenticate($credentials, bool $remember = false, bool $login = true)
     {
@@ -334,9 +334,9 @@ class Sentinel
     /**
      * Authenticates a user, with the "remember" flag.
      *
-     * @param array|\Cartalyst\Sentinel\Users\UserInterface $credentials
+     * @param array|\Hedi\Sentinel\Users\UserInterface $credentials
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function authenticateAndRemember($credentials)
     {
@@ -346,10 +346,10 @@ class Sentinel
     /**
      * Forces an authentication to bypass checkpoints.
      *
-     * @param array|\Cartalyst\Sentinel\Users\UserInterface $credentials
+     * @param array|\Hedi\Sentinel\Users\UserInterface $credentials
      * @param bool                                          $remember
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function forceAuthenticate($credentials, bool $remember = false)
     {
@@ -361,9 +361,9 @@ class Sentinel
     /**
      * Forces an authentication to bypass checkpoints, with the "remember" flag.
      *
-     * @param array|\Cartalyst\Sentinel\Users\UserInterface $credentials
+     * @param array|\Hedi\Sentinel\Users\UserInterface $credentials
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function forceAuthenticateAndRemember($credentials)
     {
@@ -373,9 +373,9 @@ class Sentinel
     /**
      * Attempt a stateless authentication.
      *
-     * @param array|\Cartalyst\Sentinel\Users\UserInterface $credentials
+     * @param array|\Hedi\Sentinel\Users\UserInterface $credentials
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function stateless($credentials)
     {
@@ -493,10 +493,10 @@ class Sentinel
     /**
      * Persists a login for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param bool                                    $remember
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function login(UserInterface $user, bool $remember = false)
     {
@@ -518,9 +518,9 @@ class Sentinel
     /**
      * Persists a login for the given user, with the "remember" flag.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
-     * @return bool|\Cartalyst\Sentinel\Users\UserInterface
+     * @return bool|\Hedi\Sentinel\Users\UserInterface
      */
     public function loginAndRemember(UserInterface $user)
     {
@@ -530,7 +530,7 @@ class Sentinel
     /**
      * Logs the current user out.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface|null $user
+     * @param \Hedi\Sentinel\Users\UserInterface|null $user
      * @param bool                                         $everywhere
      *
      * @return bool
@@ -644,7 +644,7 @@ class Sentinel
      * Add a new checkpoint to Sentinel.
      *
      * @param string                                              $key
-     * @param \Cartalyst\Sentinel\Checkpoints\CheckpointInterface $checkpoint
+     * @param \Hedi\Sentinel\Checkpoints\CheckpointInterface $checkpoint
      *
      * @return void
      */
@@ -687,7 +687,7 @@ class Sentinel
      * the cycle fails.
      *
      * @param string                                  $method
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param bool                                    $halt
      *
      * @return bool
@@ -714,7 +714,7 @@ class Sentinel
      *
      * @param bool $check
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface|null
+     * @return \Hedi\Sentinel\Users\UserInterface|null
      */
     public function getUser(bool $check = true): ?UserInterface
     {
@@ -728,7 +728,7 @@ class Sentinel
     /**
      * Sets the user associated with Sentinel (does not log in).
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return void
      */
@@ -740,7 +740,7 @@ class Sentinel
     /**
      * Returns the user repository.
      *
-     * @return \Cartalyst\Sentinel\Users\UserRepositoryInterface
+     * @return \Hedi\Sentinel\Users\UserRepositoryInterface
      */
     public function getUserRepository(): UserRepositoryInterface
     {
@@ -750,7 +750,7 @@ class Sentinel
     /**
      * Sets the user repository.
      *
-     * @param \Cartalyst\Sentinel\Users\UserRepositoryInterface $users
+     * @param \Hedi\Sentinel\Users\UserRepositoryInterface $users
      *
      * @return void
      */
@@ -764,7 +764,7 @@ class Sentinel
     /**
      * Returns the role repository.
      *
-     * @return \Cartalyst\Sentinel\Roles\RoleRepositoryInterface
+     * @return \Hedi\Sentinel\Roles\RoleRepositoryInterface
      */
     public function getRoleRepository(): RoleRepositoryInterface
     {
@@ -774,7 +774,7 @@ class Sentinel
     /**
      * Sets the role repository.
      *
-     * @param \Cartalyst\Sentinel\Roles\RoleRepositoryInterface $roles
+     * @param \Hedi\Sentinel\Roles\RoleRepositoryInterface $roles
      *
      * @return void
      */
@@ -786,7 +786,7 @@ class Sentinel
     /**
      * Returns the persistences repository.
      *
-     * @return \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface
+     * @return \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface
      */
     public function getPersistenceRepository(): PersistenceRepositoryInterface
     {
@@ -796,7 +796,7 @@ class Sentinel
     /**
      * Sets the persistences repository.
      *
-     * @param \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
+     * @param \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
      *
      * @return void
      */
@@ -808,7 +808,7 @@ class Sentinel
     /**
      * Returns the activations repository.
      *
-     * @return \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface
+     * @return \Hedi\Sentinel\Activations\ActivationRepositoryInterface
      */
     public function getActivationRepository(): ActivationRepositoryInterface
     {
@@ -818,7 +818,7 @@ class Sentinel
     /**
      * Sets the activations repository.
      *
-     * @param \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface $activations
+     * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface $activations
      *
      * @return void
      */
@@ -830,7 +830,7 @@ class Sentinel
     /**
      * Returns the reminders repository.
      *
-     * @return \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface
+     * @return \Hedi\Sentinel\Reminders\ReminderRepositoryInterface
      */
     public function getReminderRepository(): ReminderRepositoryInterface
     {
@@ -840,7 +840,7 @@ class Sentinel
     /**
      * Sets the reminders repository.
      *
-     * @param \Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface $reminders
+     * @param \Hedi\Sentinel\Reminders\ReminderRepositoryInterface $reminders
      *
      * @return void
      */
@@ -852,7 +852,7 @@ class Sentinel
     /**
      * Returns the throttle repository.
      *
-     * @return \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface
+     * @return \Hedi\Sentinel\Throttling\ThrottleRepositoryInterface
      */
     public function getThrottleRepository(): ThrottleRepositoryInterface
     {
@@ -862,7 +862,7 @@ class Sentinel
     /**
      * Sets the throttle repository.
      *
-     * @param \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface $throttle
+     * @param \Hedi\Sentinel\Throttling\ThrottleRepositoryInterface $throttle
      *
      * @return void
      */

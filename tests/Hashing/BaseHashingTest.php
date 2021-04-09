@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Hashing;
+namespace Hedi\Sentinel\Tests\Hashing;
 
 use RuntimeException;
 use PHPUnit\Framework\TestCase;
@@ -28,7 +28,7 @@ abstract class BaseHashingTest extends TestCase
     /**
      * The Hasher instance.
      *
-     * @var \Cartalyst\Sentinel\Hashing\HasherInterface
+     * @var \Hedi\Sentinel\Hashing\HasherInterface
      */
     protected $hasher;
 

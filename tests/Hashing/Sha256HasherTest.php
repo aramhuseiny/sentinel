@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Hashing;
+namespace Hedi\Sentinel\Tests\Hashing;
 
-use Cartalyst\Sentinel\Hashing\Sha256Hasher;
+use Hedi\Sentinel\Hashing\Sha256Hasher;
 
 class Sha256HasherTest extends BaseHashingTest
 {

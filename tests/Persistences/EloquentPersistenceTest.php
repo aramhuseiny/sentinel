@@ -18,24 +18,24 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Persistences;
+namespace Hedi\Sentinel\Tests\Persistences;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Connection;
-use Cartalyst\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
 use Illuminate\Database\ConnectionResolverInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Cartalyst\Sentinel\Persistences\EloquentPersistence;
+use Hedi\Sentinel\Persistences\EloquentPersistence;
 
 class EloquentPersistenceTest extends TestCase
 {
     /**
      * The Persistence instance.
      *
-     * @var \Cartalyst\Sentinel\Persistences\EloquentPersistence
+     * @var \Hedi\Sentinel\Persistences\EloquentPersistence
      */
     protected $persistence;
 

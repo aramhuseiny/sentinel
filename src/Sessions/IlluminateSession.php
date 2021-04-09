@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Sessions;
+namespace Hedi\Sentinel\Sessions;
 
 use Illuminate\Session\Store as SessionStore;
 

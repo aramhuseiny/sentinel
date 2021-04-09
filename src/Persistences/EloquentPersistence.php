@@ -18,10 +18,10 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Persistences;
+namespace Hedi\Sentinel\Persistences;
 
 use Illuminate\Database\Eloquent\Model;
-use Cartalyst\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EloquentPersistence extends Model implements PersistenceInterface

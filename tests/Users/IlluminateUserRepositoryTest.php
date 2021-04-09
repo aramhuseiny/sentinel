@@ -18,15 +18,15 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Users;
+namespace Hedi\Sentinel\Tests\Users;
 
 use Mockery as m;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Builder;
-use Cartalyst\Sentinel\Users\EloquentUser;
-use Cartalyst\Sentinel\Hashing\NativeHasher;
-use Cartalyst\Sentinel\Hashing\HasherInterface;
+use Hedi\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Hashing\NativeHasher;
+use Hedi\Sentinel\Hashing\HasherInterface;
 
 class IlluminateUserRepositoryTest extends TestCase
 {
@@ -39,10 +39,10 @@ class IlluminateUserRepositoryTest extends TestCase
 
         $this->query = m::mock(Builder::class);
 
-        $this->model = m::mock('Cartalyst\Sentinel\Users\EloquentUser');
+        $this->model = m::mock('Hedi\Sentinel\Users\EloquentUser');
         $this->model->shouldReceive('newQuery')->andReturn($this->query);
 
-        $this->users = m::mock('Cartalyst\Sentinel\Users\IlluminateUserRepository[createModel]', [
+        $this->users = m::mock('Hedi\Sentinel\Users\IlluminateUserRepository[createModel]', [
             $this->hasher,
         ]);
         $this->users->shouldReceive('createModel')->andReturn($this->model);
@@ -64,7 +64,7 @@ class IlluminateUserRepositoryTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $users = m::mock('Cartalyst\Sentinel\Users\IlluminateUserRepository[createModel,findById]', [
+        $users = m::mock('Hedi\Sentinel\Users\IlluminateUserRepository[createModel,findById]', [
             $this->hasher, null, 'UserMock',
         ]);
 
@@ -411,6 +411,6 @@ class IlluminateUserRepositoryTest extends TestCase
 
     protected function fakeUser()
     {
-        return m::mock('Cartalyst\Sentinel\Users\EloquentUser');
+        return m::mock('Hedi\Sentinel\Users\EloquentUser');
     }
 }

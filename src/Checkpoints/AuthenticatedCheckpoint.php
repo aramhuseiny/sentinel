@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Checkpoints;
+namespace Hedi\Sentinel\Checkpoints;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 
 trait AuthenticatedCheckpoint
 {

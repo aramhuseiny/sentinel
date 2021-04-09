@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Users;
+namespace Hedi\Sentinel\Users;
 
 use Closure;
 use Carbon\Carbon;
@@ -26,7 +26,7 @@ use InvalidArgumentException;
 use Cartalyst\Support\Traits\EventTrait;
 use Illuminate\Contracts\Events\Dispatcher;
 use Cartalyst\Support\Traits\RepositoryTrait;
-use Cartalyst\Sentinel\Hashing\HasherInterface;
+use Hedi\Sentinel\Hashing\HasherInterface;
 
 class IlluminateUserRepository implements UserRepositoryInterface
 {
@@ -35,7 +35,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * The Hasher instance.
      *
-     * @var \Cartalyst\Sentinel\Hashing\HasherInterface
+     * @var \Hedi\Sentinel\Hashing\HasherInterface
      */
     protected $hasher;
 
@@ -49,7 +49,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Constructor.
      *
-     * @param \Cartalyst\Sentinel\Hashing\HasherInterface $hasher
+     * @param \Hedi\Sentinel\Hashing\HasherInterface $hasher
      * @param \Illuminate\Contracts\Events\Dispatcher     $dispatcher
      * @param string|null                                 $model
      *
@@ -219,7 +219,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Fills a user with the given credentials, intelligently.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param array                                   $credentials
      *
      * @return void
@@ -258,7 +258,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Returns the hasher instance.
      *
-     * @return \Cartalyst\Sentinel\Hashing\HasherInterface
+     * @return \Hedi\Sentinel\Hashing\HasherInterface
      */
     public function getHasher(): HasherInterface
     {
@@ -268,7 +268,7 @@ class IlluminateUserRepository implements UserRepositoryInterface
     /**
      * Sets the hasher instance.
      *
-     * @param \Cartalyst\Sentinel\Hashing\HasherInterface $hasher
+     * @param \Hedi\Sentinel\Hashing\HasherInterface $hasher
      *
      * @return void
      */

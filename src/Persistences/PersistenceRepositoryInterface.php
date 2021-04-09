@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Persistences;
+namespace Hedi\Sentinel\Persistences;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 
 interface PersistenceRepositoryInterface
 {
@@ -36,7 +36,7 @@ interface PersistenceRepositoryInterface
      *
      * @param string $code
      *
-     * @return \Cartalyst\Sentinel\Persistences\PersistenceInterface|null
+     * @return \Hedi\Sentinel\Persistences\PersistenceInterface|null
      */
     public function findByPersistenceCode(string $code): ?PersistenceInterface;
 
@@ -45,14 +45,14 @@ interface PersistenceRepositoryInterface
      *
      * @param string $code
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface|null
+     * @return \Hedi\Sentinel\Users\UserInterface|null
      */
     public function findUserByPersistenceCode(string $code): ?UserInterface;
 
     /**
      * Adds a new user persistence to the current session and attaches the user.
      *
-     * @param \Cartalyst\Sentinel\Persistences\PersistenceInterface $persistable
+     * @param \Hedi\Sentinel\Persistences\PersistenceInterface $persistable
      * @param bool                                                  $remember
      *
      * @return bool|null
@@ -62,7 +62,7 @@ interface PersistenceRepositoryInterface
     /**
      * Adds a new user persistence, to remember.
      *
-     * @param \Cartalyst\Sentinel\Persistences\PersistableInterface $persistable
+     * @param \Hedi\Sentinel\Persistences\PersistableInterface $persistable
      *
      * @return bool
      */
@@ -87,7 +87,7 @@ interface PersistenceRepositoryInterface
     /**
      * Flushes persistences for the given user.
      *
-     * @param \Cartalyst\Sentinel\Persistences\PersistableInterface $persistable
+     * @param \Hedi\Sentinel\Persistences\PersistableInterface $persistable
      * @param bool                                                  $forget
      *
      * @return void

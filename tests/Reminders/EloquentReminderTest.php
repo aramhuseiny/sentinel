@@ -18,11 +18,11 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Reminders;
+namespace Hedi\Sentinel\Tests\Reminders;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Reminders\EloquentReminder;
+use Hedi\Sentinel\Reminders\EloquentReminder;
 
 class EloquentReminderTest extends TestCase
 {

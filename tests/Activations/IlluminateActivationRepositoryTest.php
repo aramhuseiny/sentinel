@@ -18,29 +18,29 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Activations;
+namespace Hedi\Sentinel\Tests\Activations;
 
 use Mockery as m;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Builder;
-use Cartalyst\Sentinel\Users\UserInterface;
-use Cartalyst\Sentinel\Activations\EloquentActivation;
-use Cartalyst\Sentinel\Activations\IlluminateActivationRepository;
+use Hedi\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Activations\EloquentActivation;
+use Hedi\Sentinel\Activations\IlluminateActivationRepository;
 
 class IlluminateActivationRepositoryTest extends TestCase
 {
     /**
      * The Activations repository instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface
+     * @var \Hedi\Sentinel\Activations\ActivationRepositoryInterface
      */
     protected $activations;
 
     /**
      * The Eloquent Activation instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\EloquentActivation
+     * @var \Hedi\Sentinel\Activations\EloquentActivation
      */
     protected $model;
 
@@ -61,7 +61,7 @@ class IlluminateActivationRepositoryTest extends TestCase
         $this->model = m::mock(EloquentActivation::class);
         $this->model->shouldReceive('newQuery')->andReturn($this->query);
 
-        $this->activations = m::mock('Cartalyst\Sentinel\Activations\IlluminateActivationRepository[createModel]', ['ActivationModelMock', 259200]);
+        $this->activations = m::mock('Hedi\Sentinel\Activations\IlluminateActivationRepository[createModel]', ['ActivationModelMock', 259200]);
         $this->activations->shouldReceive('createModel')->andReturn($this->model);
     }
 

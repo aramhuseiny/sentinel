@@ -18,11 +18,11 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Activations;
+namespace Hedi\Sentinel\Activations;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 use Cartalyst\Support\Traits\RepositoryTrait;
 
 class IlluminateActivationRepository implements ActivationRepositoryInterface

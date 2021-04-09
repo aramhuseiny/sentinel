@@ -18,11 +18,11 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Throttling;
+namespace Hedi\Sentinel\Throttling;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 use Cartalyst\Support\Traits\RepositoryTrait;
 
 class IlluminateThrottleRepository implements ThrottleRepositoryInterface
@@ -120,7 +120,7 @@ class IlluminateThrottleRepository implements ThrottleRepositoryInterface
      * @return void
      */
     public function __construct(
-        $model = 'Cartalyst\Sentinel\Throttling\EloquentThrottle',
+        $model = 'Hedi\Sentinel\Throttling\EloquentThrottle',
         $globalInterval = null,
         $globalThresholds = null,
         $ipInterval = null,
@@ -466,7 +466,7 @@ class IlluminateThrottleRepository implements ThrottleRepositoryInterface
     /**
      * Returns the user throttles collection.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -484,7 +484,7 @@ class IlluminateThrottleRepository implements ThrottleRepositoryInterface
     /**
      * Loads and returns the user throttles collection.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return \Illuminate\Database\Eloquent\Collection
      */
@@ -508,7 +508,7 @@ class IlluminateThrottleRepository implements ThrottleRepositoryInterface
      * Returns the seconds to free based on the given throttle and
      * the presented delay in seconds, by comparing it to now.
      *
-     * @param \Cartalyst\Sentinel\Throttling\EloquentThrottle $throttle
+     * @param \Hedi\Sentinel\Throttling\EloquentThrottle $throttle
      * @param int                                             $interval
      *
      * @return int

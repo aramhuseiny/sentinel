@@ -18,10 +18,10 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Checkpoints;
+namespace Hedi\Sentinel\Checkpoints;
 
-use Cartalyst\Sentinel\Users\UserInterface;
-use Cartalyst\Sentinel\Activations\ActivationRepositoryInterface;
+use Hedi\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Activations\ActivationRepositoryInterface;
 
 class ActivationCheckpoint implements CheckpointInterface
 {
@@ -30,14 +30,14 @@ class ActivationCheckpoint implements CheckpointInterface
     /**
      * The Activations repository instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface
+     * @var \Hedi\Sentinel\Activations\ActivationRepositoryInterface
      */
     protected $activations;
 
     /**
      * Constructor.
      *
-     * @param \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface $activations
+     * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface $activations
      *
      * @return void
      */
@@ -65,9 +65,9 @@ class ActivationCheckpoint implements CheckpointInterface
     /**
      * Checks the activation status of the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
-     * @throws \Cartalyst\Sentinel\Checkpoints\NotActivatedException
+     * @throws \Hedi\Sentinel\Checkpoints\NotActivatedException
      *
      * @return bool
      */

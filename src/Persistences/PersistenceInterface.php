@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Persistences;
+namespace Hedi\Sentinel\Persistences;
 
 interface PersistenceInterface
 {

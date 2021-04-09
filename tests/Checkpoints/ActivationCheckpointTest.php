@@ -18,35 +18,35 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Checkpoints;
+namespace Hedi\Sentinel\Tests\Checkpoints;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Users\EloquentUser;
-use Cartalyst\Sentinel\Checkpoints\ActivationCheckpoint;
-use Cartalyst\Sentinel\Checkpoints\NotActivatedException;
-use Cartalyst\Sentinel\Activations\IlluminateActivationRepository;
+use Hedi\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Checkpoints\ActivationCheckpoint;
+use Hedi\Sentinel\Checkpoints\NotActivatedException;
+use Hedi\Sentinel\Activations\IlluminateActivationRepository;
 
 class ActivationCheckpointTest extends TestCase
 {
     /**
      * The Activations repository instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface
+     * @var \Hedi\Sentinel\Activations\ActivationRepositoryInterface
      */
     protected $activations;
 
     /**
      * The Eloquent User instance.
      *
-     * @var \Cartalyst\Sentinel\Users\EloquentUser
+     * @var \Hedi\Sentinel\Users\EloquentUser
      */
     protected $user;
 
     /**
      * The activation checkpoint.
      *
-     * @var \Cartalyst\Sentinel\Checkpoint\ActivationCheckpoint
+     * @var \Hedi\Sentinel\Checkpoint\ActivationCheckpoint
      */
     protected $checkpoint;
 

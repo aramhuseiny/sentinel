@@ -18,12 +18,12 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Persistences;
+namespace Hedi\Sentinel\Persistences;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 use Cartalyst\Support\Traits\RepositoryTrait;
-use Cartalyst\Sentinel\Cookies\CookieInterface;
-use Cartalyst\Sentinel\Sessions\SessionInterface;
+use Hedi\Sentinel\Cookies\CookieInterface;
+use Hedi\Sentinel\Sessions\SessionInterface;
 
 class IlluminatePersistenceRepository implements PersistenceRepositoryInterface
 {
@@ -39,14 +39,14 @@ class IlluminatePersistenceRepository implements PersistenceRepositoryInterface
     /**
      * Session storage driver.
      *
-     * @var \Cartalyst\Sentinel\Sessions\SessionInterface
+     * @var \Hedi\Sentinel\Sessions\SessionInterface
      */
     protected $session;
 
     /**
      * Cookie storage driver.
      *
-     * @var \Cartalyst\Sentinel\Cookies\CookieInterface
+     * @var \Hedi\Sentinel\Cookies\CookieInterface
      */
     protected $cookie;
 
@@ -60,8 +60,8 @@ class IlluminatePersistenceRepository implements PersistenceRepositoryInterface
     /**
      * Create a new Sentinel persistence repository.
      *
-     * @param \Cartalyst\Sentinel\Sessions\SessionInterface $session
-     * @param \Cartalyst\Sentinel\Cookies\CookieInterface   $cookie
+     * @param \Hedi\Sentinel\Sessions\SessionInterface $session
+     * @param \Hedi\Sentinel\Cookies\CookieInterface   $cookie
      * @param string                                        $model
      * @param bool                                          $single
      *

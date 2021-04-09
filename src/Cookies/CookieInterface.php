@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Cookies;
+namespace Hedi\Sentinel\Cookies;
 
 interface CookieInterface
 {

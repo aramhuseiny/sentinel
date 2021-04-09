@@ -18,35 +18,35 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Activations;
+namespace Hedi\Sentinel\Activations;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 
 interface ActivationRepositoryInterface
 {
     /**
      * Create a new activation record and code.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
-     * @return \Cartalyst\Sentinel\Activations\ActivationInterface
+     * @return \Hedi\Sentinel\Activations\ActivationInterface
      */
     public function create(UserInterface $user): ActivationInterface;
 
     /**
      * Gets the activation for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param string|null                             $code
      *
-     * @return \Cartalyst\Sentinel\Activations\ActivationInterface|null
+     * @return \Hedi\Sentinel\Activations\ActivationInterface|null
      */
     public function get(UserInterface $user, string $code = null): ?ActivationInterface;
 
     /**
      * Checks if a valid activation for the given user exists.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param string|null                             $code
      *
      * @return bool
@@ -56,7 +56,7 @@ interface ActivationRepositoryInterface
     /**
      * Completes the activation for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param string                                  $code
      *
      * @return bool
@@ -66,7 +66,7 @@ interface ActivationRepositoryInterface
     /**
      * Checks if a valid activation has been completed.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return bool
      */
@@ -75,7 +75,7 @@ interface ActivationRepositoryInterface
     /**
      * Remove an existing activation (deactivate).
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return bool|null
      */

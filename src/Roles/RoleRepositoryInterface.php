@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Roles;
+namespace Hedi\Sentinel\Roles;
 
 interface RoleRepositoryInterface
 {
@@ -27,7 +27,7 @@ interface RoleRepositoryInterface
      *
      * @param int $id
      *
-     * @return \Cartalyst\Sentinel\Roles\RoleInterface|null
+     * @return \Hedi\Sentinel\Roles\RoleInterface|null
      */
     public function findById(int $id): ?RoleInterface;
 
@@ -36,7 +36,7 @@ interface RoleRepositoryInterface
      *
      * @param string $slug
      *
-     * @return \Cartalyst\Sentinel\Roles\RoleInterface|null
+     * @return \Hedi\Sentinel\Roles\RoleInterface|null
      */
     public function findBySlug(string $slug): ?RoleInterface;
 
@@ -45,7 +45,7 @@ interface RoleRepositoryInterface
      *
      * @param string $name
      *
-     * @return \Cartalyst\Sentinel\Roles\RoleInterface|null
+     * @return \Hedi\Sentinel\Roles\RoleInterface|null
      */
     public function findByName(string $name): ?RoleInterface;
 }

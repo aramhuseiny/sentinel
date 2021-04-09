@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Sessions;
+namespace Hedi\Sentinel\Sessions;
 
 interface SessionInterface
 {

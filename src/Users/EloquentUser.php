@@ -18,23 +18,23 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Users;
+namespace Hedi\Sentinel\Users;
 
 use IteratorAggregate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Cartalyst\Sentinel\Roles\EloquentRole;
-use Cartalyst\Sentinel\Roles\RoleInterface;
-use Cartalyst\Sentinel\Roles\RoleableInterface;
-use Cartalyst\Sentinel\Reminders\EloquentReminder;
-use Cartalyst\Sentinel\Throttling\EloquentThrottle;
+use Hedi\Sentinel\Roles\EloquentRole;
+use Hedi\Sentinel\Roles\RoleInterface;
+use Hedi\Sentinel\Roles\RoleableInterface;
+use Hedi\Sentinel\Reminders\EloquentReminder;
+use Hedi\Sentinel\Throttling\EloquentThrottle;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Cartalyst\Sentinel\Permissions\PermissibleTrait;
-use Cartalyst\Sentinel\Activations\EloquentActivation;
-use Cartalyst\Sentinel\Permissions\PermissibleInterface;
-use Cartalyst\Sentinel\Permissions\PermissionsInterface;
-use Cartalyst\Sentinel\Persistences\EloquentPersistence;
-use Cartalyst\Sentinel\Persistences\PersistableInterface;
+use Hedi\Sentinel\Permissions\PermissibleTrait;
+use Hedi\Sentinel\Activations\EloquentActivation;
+use Hedi\Sentinel\Permissions\PermissibleInterface;
+use Hedi\Sentinel\Permissions\PermissionsInterface;
+use Hedi\Sentinel\Persistences\EloquentPersistence;
+use Hedi\Sentinel\Persistences\PersistableInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, RoleableInterface, UserInterface
@@ -469,7 +469,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     /**
      * Creates a permissions object.
      *
-     * @return \Cartalyst\Sentinel\Permissions\PermissionsInterface
+     * @return \Hedi\Sentinel\Permissions\PermissionsInterface
      */
     protected function createPermissions(): PermissionsInterface
     {

@@ -18,30 +18,30 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Native\Facades;
+namespace Hedi\Sentinel\Native\Facades;
 
-use Cartalyst\Sentinel\Native\SentinelBootstrapper;
+use Hedi\Sentinel\Native\SentinelBootstrapper;
 
 class Sentinel
 {
     /**
      * The Sentinel instance.
      *
-     * @var \Cartalyst\Sentinel\Sentinel
+     * @var \Hedi\Sentinel\Sentinel
      */
     protected $sentinel;
 
     /**
      * The Native Bootstraper instance.
      *
-     * @var \Cartalyst\Sentinel\Native\SentinelBootstrapper
+     * @var \Hedi\Sentinel\Native\SentinelBootstrapper
      */
     protected static $instance;
 
     /**
      * Constructor.
      *
-     * @param \Cartalyst\Sentinel\Native\SentinelBootstrapper $bootstrapper
+     * @param \Hedi\Sentinel\Native\SentinelBootstrapper $bootstrapper
      *
      * @return void
      */
@@ -57,7 +57,7 @@ class Sentinel
     /**
      * Returns the Sentinel instance.
      *
-     * @return \Cartalyst\Sentinel\Sentinel
+     * @return \Hedi\Sentinel\Sentinel
      */
     public function getSentinel()
     {
@@ -67,9 +67,9 @@ class Sentinel
     /**
      * Creates a new Native Bootstraper instance.
      *
-     * @param \Cartalyst\Sentinel\Native\SentinelBootstrapper $bootstrapper
+     * @param \Hedi\Sentinel\Native\SentinelBootstrapper $bootstrapper
      *
-     * @return \Cartalyst\Sentinel\Native\SentinelBootstrapper
+     * @return \Hedi\Sentinel\Native\SentinelBootstrapper
      */
     public static function instance(SentinelBootstrapper $bootstrapper = null)
     {

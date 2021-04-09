@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Roles;
+namespace Hedi\Sentinel\Roles;
 
 use Cartalyst\Support\Traits\RepositoryTrait;
 

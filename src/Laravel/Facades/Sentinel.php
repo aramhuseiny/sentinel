@@ -18,12 +18,12 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Laravel\Facades;
+namespace Hedi\Sentinel\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
 /**
- * @mixin \Cartalyst\Sentinel\Sentinel
+ * @mixin \Hedi\Sentinel\Sentinel
  */
 class Sentinel extends Facade
 {

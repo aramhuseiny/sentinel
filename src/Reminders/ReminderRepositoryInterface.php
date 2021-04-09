@@ -18,16 +18,16 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Reminders;
+namespace Hedi\Sentinel\Reminders;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 
 interface ReminderRepositoryInterface
 {
     /**
      * Create a new reminder record and code.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return \Illuminate\Database\Eloquent\Model
      */
@@ -36,7 +36,7 @@ interface ReminderRepositoryInterface
     /**
      * Gets the reminder for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param string|null                             $code
      *
      * @return \Illuminate\Database\Eloquent\Model|null
@@ -46,7 +46,7 @@ interface ReminderRepositoryInterface
     /**
      * Check if a valid reminder exists.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param string|null                             $code
      *
      * @return bool
@@ -56,7 +56,7 @@ interface ReminderRepositoryInterface
     /**
      * Complete reminder for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param string                                  $code
      * @param string                                  $password
      *

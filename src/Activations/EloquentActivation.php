@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Activations;
+namespace Hedi\Sentinel\Activations;
 
 use Illuminate\Database\Eloquent\Model;
 

@@ -18,20 +18,20 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Persistences;
+namespace Hedi\Sentinel\Tests\Persistences;
 
 use Mockery as m;
 use ArrayIterator;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Builder;
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 use Illuminate\Database\Eloquent\Collection;
-use Cartalyst\Sentinel\Cookies\CookieInterface;
-use Cartalyst\Sentinel\Sessions\SessionInterface;
-use Cartalyst\Sentinel\Persistences\PersistableInterface;
-use Cartalyst\Sentinel\Persistences\PersistenceInterface;
-use Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository;
+use Hedi\Sentinel\Cookies\CookieInterface;
+use Hedi\Sentinel\Sessions\SessionInterface;
+use Hedi\Sentinel\Persistences\PersistableInterface;
+use Hedi\Sentinel\Persistences\PersistenceInterface;
+use Hedi\Sentinel\Persistences\IlluminatePersistenceRepository;
 
 class IlluminatePersistenceRepositoryTest extends TestCase
 {
@@ -103,10 +103,10 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $query->shouldReceive('where')->with('code', 'foobar')->andReturn($query);
         $query->shouldReceive('first')->once()->andReturn($persistence);
 
-        $model = m::mock('Cartalyst\Sentinel\Persistences\EloquentPersistence');
+        $model = m::mock('Hedi\Sentinel\Persistences\EloquentPersistence');
         $model->shouldReceive('newQuery')->andReturn($query);
 
-        $persistenceRepository = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistenceRepository = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
         $persistenceRepository->shouldReceive('createModel')->andReturn($model);
 
         $this->assertInstanceOf(PersistenceInterface::class, $persistenceRepository->findByPersistenceCode('foobar'));
@@ -124,10 +124,10 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $query->shouldReceive('where')->with('code', 'foobar')->andReturn($query);
         $query->shouldReceive('first')->once()->andReturn($persistence);
 
-        $model = m::mock('Cartalyst\Sentinel\Persistences\EloquentPersistence');
+        $model = m::mock('Hedi\Sentinel\Persistences\EloquentPersistence');
         $model->shouldReceive('newQuery')->andReturn($query);
 
-        $persistenceRepository = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistenceRepository = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
         $persistenceRepository->shouldReceive('createModel')->andReturn($model);
 
         $user = $persistenceRepository->findUserByPersistenceCode('foobar');
@@ -142,10 +142,10 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $query->shouldReceive('where')->with('code', 'foobar')->andReturn($query);
         $query->shouldReceive('first')->once()->andReturn(null);
 
-        $model = m::mock('Cartalyst\Sentinel\Persistences\EloquentPersistence');
+        $model = m::mock('Hedi\Sentinel\Persistences\EloquentPersistence');
         $model->shouldReceive('newQuery')->andReturn($query);
 
-        $persistenceRepository = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistenceRepository = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
         $persistenceRepository->shouldReceive('createModel')->andReturn($model);
 
         $user = $persistenceRepository->findUserByPersistenceCode('foobar');
@@ -177,7 +177,7 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $persistable->shouldReceive('getPersistableKey')->once()->andReturn('foo');
         $persistable->shouldReceive('getPersistableId')->once()->andReturn(1);
 
-        $persistenceRepository = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie, null, true]);
+        $persistenceRepository = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie, null, true]);
         $persistenceRepository->shouldReceive('createModel')->once()->andReturn($model);
 
         $this->assertTrue($persistenceRepository->persist($persistable));
@@ -199,7 +199,7 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $persistable->shouldReceive('getPersistableKey')->once()->andReturn('foo');
         $persistable->shouldReceive('getPersistableId')->once()->andReturn('1');
 
-        $persistence = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistence = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
         $persistence->shouldReceive('createModel')->once()->andReturn($model);
 
         $this->assertTrue($persistence->persistAndRemember($persistable));
@@ -208,8 +208,8 @@ class IlluminatePersistenceRepositoryTest extends TestCase
     /** @test */
     public function it_can_remove_a_persistence()
     {
-        $persistence = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
-        $persistence->shouldReceive('createModel')->andReturn($model = m::mock('Cartalyst\Sentinel\Persistences\EloquentPersistence'));
+        $persistence = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistence->shouldReceive('createModel')->andReturn($model = m::mock('Hedi\Sentinel\Persistences\EloquentPersistence'));
 
         $model->shouldReceive('newQuery')->andReturn($query = m::mock(Builder::class));
         $query->shouldReceive('where')->once()->andReturn($model = m::mock(Model::class));
@@ -226,7 +226,7 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $this->session->shouldReceive('get')->once();
         $this->cookie->shouldReceive('get')->once();
 
-        $persistence = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistence = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
 
         $builder = m::mock(Builder::class);
         $builder->shouldReceive('get')->once()->andReturn([]);
@@ -255,7 +255,7 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $persistenceRecords = m::mock(Collection::class);
         $persistenceRecords->shouldReceive('getIterator')->once()->andReturn(new ArrayIterator([$record1, $record2]));
 
-        $model = m::mock('Cartalyst\Sentinel\Persistences\EloquentPersistence');
+        $model = m::mock('Hedi\Sentinel\Persistences\EloquentPersistence');
         $model->shouldReceive('newQuery')->andReturn($query = m::mock(Builder::class));
 
         $query->shouldReceive('where')->with('code', 'afoobar')->andReturn($query);
@@ -266,7 +266,7 @@ class IlluminatePersistenceRepositoryTest extends TestCase
         $persistable->shouldReceive('persistences')->once()->andReturn($query);
         $persistable->shouldReceive('getPersistableRelationship')->once()->andReturn('persistences');
 
-        $persistence = m::mock('Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
+        $persistence = m::mock('Hedi\Sentinel\Persistences\IlluminatePersistenceRepository[createModel]', [$this->session, $this->cookie]);
         $this->session->shouldReceive('get')->times(3)->andReturn('afoobar');
         $persistence->shouldReceive('createModel')->andReturn($model);
 

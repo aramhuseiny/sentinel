@@ -18,14 +18,14 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Cookies;
+namespace Hedi\Sentinel\Tests\Cookies;
 
 use Mockery as m;
 use Illuminate\Http\Request;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Cookie\CookieJar;
 use Symfony\Component\HttpFoundation\Cookie;
-use Cartalyst\Sentinel\Cookies\IlluminateCookie;
+use Hedi\Sentinel\Cookies\IlluminateCookie;
 
 class IlluminateCookieTest extends TestCase
 {

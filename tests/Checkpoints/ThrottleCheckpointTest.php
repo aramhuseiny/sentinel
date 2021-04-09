@@ -18,36 +18,36 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Checkpoints;
+namespace Hedi\Sentinel\Tests\Checkpoints;
 
 use Mockery as m;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Users\EloquentUser;
-use Cartalyst\Sentinel\Checkpoints\ThrottleCheckpoint;
-use Cartalyst\Sentinel\Checkpoints\ThrottlingException;
-use Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository;
+use Hedi\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Checkpoints\ThrottleCheckpoint;
+use Hedi\Sentinel\Checkpoints\ThrottlingException;
+use Hedi\Sentinel\Throttling\IlluminateThrottleRepository;
 
 class ThrottleCheckpointTest extends TestCase
 {
     /**
      * The Checkpoint instance.
      *
-     * @var \Cartalyst\Sentinel\Checkpoints\ThrottleCheckpoints
+     * @var \Hedi\Sentinel\Checkpoints\ThrottleCheckpoints
      */
     protected $checkpoint;
 
     /**
      * The Eloquent User instance.
      *
-     * @var \Cartalyst\Sentinel\Users\EloquentUser
+     * @var \Hedi\Sentinel\Users\EloquentUser
      */
     protected $user;
 
     /**
      * The Users repository instance.
      *
-     * @var \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface
+     * @var \Hedi\Sentinel\Throttling\ThrottleRepositoryInterface
      */
     protected $throttle;
 

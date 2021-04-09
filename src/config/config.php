@@ -51,7 +51,7 @@ return [
     */
 
     'users' => [
-        'model' => 'Cartalyst\Sentinel\Users\EloquentUser',
+        'model' => 'Hedi\Sentinel\Users\EloquentUser',
     ],
 
     /*
@@ -64,7 +64,7 @@ return [
     */
 
     'roles' => [
-        'model' => 'Cartalyst\Sentinel\Roles\EloquentRole',
+        'model' => 'Hedi\Sentinel\Roles\EloquentRole',
     ],
 
     /*
@@ -75,8 +75,8 @@ return [
     | Here you may specify the permissions class. Sentinel ships with two
     | permission types.
     |
-    | 'Cartalyst\Sentinel\Permissions\StandardPermissions'
-    | 'Cartalyst\Sentinel\Permissions\StrictPermissions'
+    | 'Hedi\Sentinel\Permissions\StandardPermissions'
+    | 'Hedi\Sentinel\Permissions\StrictPermissions'
     |
     | "StandardPermissions" will assign a higher priority to the user
     | permissions over role permissions, once a user is allowed or denied
@@ -89,7 +89,7 @@ return [
     */
 
     'permissions' => [
-        'class' => 'Cartalyst\Sentinel\Permissions\StandardPermissions',
+        'class' => 'Hedi\Sentinel\Permissions\StandardPermissions',
     ],
 
     /*
@@ -103,7 +103,7 @@ return [
     */
 
     'persistences' => [
-        'model' => 'Cartalyst\Sentinel\Persistences\EloquentPersistence',
+        'model' => 'Hedi\Sentinel\Persistences\EloquentPersistence',
 
         'single' => false,
     ],
@@ -140,7 +140,7 @@ return [
     */
 
     'activations' => [
-        'model' => 'Cartalyst\Sentinel\Activations\EloquentActivation',
+        'model' => 'Hedi\Sentinel\Activations\EloquentActivation',
 
         'expires' => 259200,
 
@@ -160,7 +160,7 @@ return [
     */
 
     'reminders' => [
-        'model' => 'Cartalyst\Sentinel\Reminders\EloquentReminder',
+        'model' => 'Hedi\Sentinel\Reminders\EloquentReminder',
 
         'expires' => 14400,
 
@@ -210,7 +210,7 @@ return [
     */
 
     'throttling' => [
-        'model' => 'Cartalyst\Sentinel\Throttling\EloquentThrottle',
+        'model' => 'Hedi\Sentinel\Throttling\EloquentThrottle',
 
         'global' => [
             'interval' => 900,

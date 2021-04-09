@@ -18,16 +18,16 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Throttling;
+namespace Hedi\Sentinel\Tests\Throttling;
 
 use Mockery as m;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Builder;
-use Cartalyst\Sentinel\Users\UserInterface;
-use Cartalyst\Sentinel\Throttling\EloquentThrottle;
-use Cartalyst\Sentinel\Users\IlluminateUserRepository;
+use Hedi\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Throttling\EloquentThrottle;
+use Hedi\Sentinel\Users\IlluminateUserRepository;
 
 class IlluminateThrottleRepositoryTest extends TestCase
 {
@@ -50,13 +50,13 @@ class IlluminateThrottleRepositoryTest extends TestCase
 
         $this->query = m::mock(Builder::class);
 
-        $this->model = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $this->model = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $this->model->shouldReceive('newQuery')->andReturn($this->query);
 
         $this->users = m::mock(IlluminateUserRepository::class);
 
         $this->throttle = m::mock(
-            'Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository[createModel]',
+            'Hedi\Sentinel\Throttling\IlluminateThrottleRepository[createModel]',
             [$this->users]
         );
         $this->throttle->shouldReceive('createModel')->andReturn($this->model);
@@ -72,7 +72,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
 
     public function testConstructor()
     {
-        $throttle = m::mock('Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository[createModel]', [
+        $throttle = m::mock('Hedi\Sentinel\Throttling\IlluminateThrottleRepository[createModel]', [
             EloquentThrottle::class, 1, 2, 3, 4, 5, 6,
         ]);
 
@@ -87,7 +87,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testGlobalDelayWithIntegerThreshold1()
     {
-        $first = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $first = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $first->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -110,7 +110,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testGlobalDelayWithIntegerThreshold2()
     {
-        $first = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $first = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $first->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -133,7 +133,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testGlobalDelayWithArrayThresholds1()
     {
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -156,7 +156,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testGlobalDelayWithArrayThresholds2()
     {
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(11);
@@ -179,7 +179,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testGlobalDelayWithArrayThresholds3()
     {
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time() - 200));
 
         $this->models->shouldReceive('count')->andReturn(11);
@@ -202,7 +202,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testIpDelayWithIntegerThreshold()
     {
-        $first = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $first = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $first->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -226,7 +226,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testIpDelayWithArrayThresholds1()
     {
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -250,7 +250,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
     /** @test */
     public function testIpDelayWithArrayThresholds2()
     {
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(11);
@@ -277,7 +277,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
         $user = m::mock(UserInterface::class);
         $user->shouldReceive('getUserId')->andReturn(1);
 
-        $first = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $first = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $first->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -304,7 +304,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
         $user = m::mock(UserInterface::class);
         $user->shouldReceive('getUserId')->andReturn(1);
 
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(6);
@@ -331,7 +331,7 @@ class IlluminateThrottleRepositoryTest extends TestCase
         $user = m::mock(UserInterface::class);
         $user->shouldReceive('getUserId')->andReturn(1);
 
-        $last = m::mock('Cartalyst\Sentinel\Throttling\EloquentThrottle');
+        $last = m::mock('Hedi\Sentinel\Throttling\EloquentThrottle');
         $last->shouldReceive('getAttribute')->andReturn(Carbon::createFromTimestamp(time()));
 
         $this->models->shouldReceive('count')->andReturn(11);

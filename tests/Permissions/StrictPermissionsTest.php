@@ -18,11 +18,11 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Permissions;
+namespace Hedi\Sentinel\Tests\Permissions;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Permissions\StrictPermissions;
+use Hedi\Sentinel\Permissions\StrictPermissions;
 
 class StrictPermissionsTest extends TestCase
 {

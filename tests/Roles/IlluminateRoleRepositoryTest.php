@@ -18,12 +18,12 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Roles;
+namespace Hedi\Sentinel\Tests\Roles;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Builder;
-use Cartalyst\Sentinel\Roles\EloquentRole;
+use Hedi\Sentinel\Roles\EloquentRole;
 
 class IlluminateRoleRepositoryTest extends TestCase
 {
@@ -34,7 +34,7 @@ class IlluminateRoleRepositoryTest extends TestCase
     {
         $this->query = m::mock(Builder::class);
         $this->model = m::mock(EloquentRole::class);
-        $this->roles = m::mock('Cartalyst\Sentinel\Roles\IlluminateRoleRepository[createModel]');
+        $this->roles = m::mock('Hedi\Sentinel\Roles\IlluminateRoleRepository[createModel]');
         $this->roles->shouldReceive('createModel')->andReturn($this->model);
     }
 
@@ -49,7 +49,7 @@ class IlluminateRoleRepositoryTest extends TestCase
     /** @test */
     public function it_can_be_instantiated()
     {
-        $roles = m::mock('Cartalyst\Sentinel\Roles\IlluminateRoleRepository[createModel]', [
+        $roles = m::mock('Hedi\Sentinel\Roles\IlluminateRoleRepository[createModel]', [
             EloquentRole::class,
         ]);
 

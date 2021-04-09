@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Native;
+namespace Hedi\Sentinel\Native;
 
 use ArrayAccess;
 

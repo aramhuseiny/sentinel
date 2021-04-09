@@ -18,13 +18,13 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Reminders;
+namespace Hedi\Sentinel\Reminders;
 
 use Carbon\Carbon;
 use Illuminate\Support\Str;
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 use Cartalyst\Support\Traits\RepositoryTrait;
-use Cartalyst\Sentinel\Users\UserRepositoryInterface;
+use Hedi\Sentinel\Users\UserRepositoryInterface;
 
 class IlluminateReminderRepository implements ReminderRepositoryInterface
 {
@@ -33,7 +33,7 @@ class IlluminateReminderRepository implements ReminderRepositoryInterface
     /**
      * The Users repository instance.
      *
-     * @var \Cartalyst\Sentinel\Users\UserRepositoryInterface
+     * @var \Hedi\Sentinel\Users\UserRepositoryInterface
      */
     protected $users;
 
@@ -54,7 +54,7 @@ class IlluminateReminderRepository implements ReminderRepositoryInterface
     /**
      * Constructor.
      *
-     * @param \Cartalyst\Sentinel\Users\UserRepositoryInterface $users
+     * @param \Hedi\Sentinel\Users\UserRepositoryInterface $users
      * @param string                                            $model
      * @param int                                               $expires
      *

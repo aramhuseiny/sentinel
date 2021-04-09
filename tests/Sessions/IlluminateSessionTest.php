@@ -18,12 +18,12 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Sessions;
+namespace Hedi\Sentinel\Tests\Sessions;
 
 use Mockery as m;
 use Illuminate\Session\Store;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Sessions\IlluminateSession;
+use Hedi\Sentinel\Sessions\IlluminateSession;
 
 class IlluminateSessionTest extends TestCase
 {

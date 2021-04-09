@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Throttling;
+namespace Hedi\Sentinel\Throttling;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 
 interface ThrottleRepositoryInterface
 {
@@ -43,7 +43,7 @@ interface ThrottleRepositoryInterface
     /**
      * Returns the throttling delay for the given user, in seconds.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return int
      */
@@ -53,7 +53,7 @@ interface ThrottleRepositoryInterface
      * Logs a new throttling entry.
      *
      * @param string                                  $ipAddress
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return void
      */

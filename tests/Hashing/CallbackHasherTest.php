@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Hashing;
+namespace Hedi\Sentinel\Tests\Hashing;
 
-use Cartalyst\Sentinel\Hashing\CallbackHasher;
+use Hedi\Sentinel\Hashing\CallbackHasher;
 
 class CallbackHasherTest extends BaseHashingTest
 {

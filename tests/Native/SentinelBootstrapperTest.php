@@ -18,11 +18,11 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Native;
+namespace Hedi\Sentinel\Tests\Native;
 
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Sentinel;
-use Cartalyst\Sentinel\Native\SentinelBootstrapper;
+use Hedi\Sentinel\Sentinel;
+use Hedi\Sentinel\Native\SentinelBootstrapper;
 
 class SentinelBootstrapperTest extends TestCase
 {

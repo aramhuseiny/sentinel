@@ -18,14 +18,14 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Roles;
+namespace Hedi\Sentinel\Roles;
 
 use IteratorAggregate;
 use Illuminate\Database\Eloquent\Model;
-use Cartalyst\Sentinel\Users\EloquentUser;
-use Cartalyst\Sentinel\Permissions\PermissibleTrait;
-use Cartalyst\Sentinel\Permissions\PermissibleInterface;
-use Cartalyst\Sentinel\Permissions\PermissionsInterface;
+use Hedi\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Permissions\PermissibleTrait;
+use Hedi\Sentinel\Permissions\PermissibleInterface;
+use Hedi\Sentinel\Permissions\PermissionsInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
 class EloquentRole extends Model implements PermissibleInterface, RoleInterface

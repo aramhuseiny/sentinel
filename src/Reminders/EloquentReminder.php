@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Reminders;
+namespace Hedi\Sentinel\Reminders;
 
 use Illuminate\Database\Eloquent\Model;
 

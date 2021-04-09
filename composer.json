@@ -1,9 +1,8 @@
 {
-    "name": "cartalyst/sentinel",
+    "name": "hedi/sentinel",
     "description": "PHP 7.3+ Fully-featured Authentication & Authorization System",
     "keywords": [
         "php",
-        "cartalyst",
         "laravel",
         "auth",
         "security"
@@ -11,9 +10,8 @@
     "license": "BSD-3-Clause",
     "authors": [
         {
-            "name": "Cartalyst LLC",
-            "email": "help@cartalyst.com",
-            "homepage": "https://cartalyst.com"
+            "name": "Aram Huseiny",
+            "email": "huseiny.aram@gmail.com"
         }
     ],
     "require": {
@@ -38,12 +36,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Cartalyst\\Sentinel\\": "src/"
+            "Hedi\\Sentinel\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Cartalyst\\Sentinel\\Tests\\": "tests/"
+            "Hedi\\Sentinel\\Tests\\": "tests/"
         }
     },
     "config": {
@@ -61,9 +59,9 @@
                 "Cartalyst\\Sentinel\\Laravel\\SentinelServiceProvider"
             ],
             "aliases": {
-                "Activation": "Cartalyst\\Sentinel\\Laravel\\Facades\\Activation",
-                "Reminder": "Cartalyst\\Sentinel\\Laravel\\Facades\\Reminder",
-                "Sentinel": "Cartalyst\\Sentinel\\Laravel\\Facades\\Sentinel"
+                "Activation": "Hedi\\Sentinel\\Laravel\\Facades\\Activation",
+                "Reminder": "Hedi\\Sentinel\\Laravel\\Facades\\Reminder",
+                "Sentinel": "Hedi\\Sentinel\\Laravel\\Facades\\Sentinel"
             }
         }
     },

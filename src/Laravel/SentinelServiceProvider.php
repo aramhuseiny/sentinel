@@ -18,24 +18,24 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Laravel;
+namespace Hedi\Sentinel\Laravel;
 
 use Exception;
 use InvalidArgumentException;
-use Cartalyst\Sentinel\Sentinel;
+use Hedi\Sentinel\Sentinel;
 use Illuminate\Support\ServiceProvider;
-use Cartalyst\Sentinel\Hashing\NativeHasher;
+use Hedi\Sentinel\Hashing\NativeHasher;
 use Symfony\Component\HttpFoundation\Response;
-use Cartalyst\Sentinel\Cookies\IlluminateCookie;
-use Cartalyst\Sentinel\Sessions\IlluminateSession;
-use Cartalyst\Sentinel\Checkpoints\ThrottleCheckpoint;
-use Cartalyst\Sentinel\Roles\IlluminateRoleRepository;
-use Cartalyst\Sentinel\Users\IlluminateUserRepository;
-use Cartalyst\Sentinel\Checkpoints\ActivationCheckpoint;
-use Cartalyst\Sentinel\Reminders\IlluminateReminderRepository;
-use Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository;
-use Cartalyst\Sentinel\Activations\IlluminateActivationRepository;
-use Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository;
+use Hedi\Sentinel\Cookies\IlluminateCookie;
+use Hedi\Sentinel\Sessions\IlluminateSession;
+use Hedi\Sentinel\Checkpoints\ThrottleCheckpoint;
+use Hedi\Sentinel\Roles\IlluminateRoleRepository;
+use Hedi\Sentinel\Users\IlluminateUserRepository;
+use Hedi\Sentinel\Checkpoints\ActivationCheckpoint;
+use Hedi\Sentinel\Reminders\IlluminateReminderRepository;
+use Hedi\Sentinel\Throttling\IlluminateThrottleRepository;
+use Hedi\Sentinel\Activations\IlluminateActivationRepository;
+use Hedi\Sentinel\Persistences\IlluminatePersistenceRepository;
 
 class SentinelServiceProvider extends ServiceProvider
 {
@@ -356,7 +356,7 @@ class SentinelServiceProvider extends ServiceProvider
             return $sentinel;
         });
 
-        $this->app->alias('sentinel', 'Cartalyst\Sentinel\Sentinel');
+        $this->app->alias('sentinel', 'Hedi\Sentinel\Sentinel');
     }
 
     /**

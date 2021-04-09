@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Throttling;
+namespace Hedi\Sentinel\Throttling;
 
 use Illuminate\Database\Eloquent\Model;
 

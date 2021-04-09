@@ -18,14 +18,14 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Users;
+namespace Hedi\Sentinel\Tests\Users;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder;
-use Cartalyst\Sentinel\Users\EloquentUser;
-use Cartalyst\Sentinel\Roles\RoleInterface;
+use Hedi\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Roles\RoleInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -438,7 +438,7 @@ class EloquentUserTest extends TestCase
     /** @test */
     public function it_can_delete_a_user()
     {
-        $user         = m::mock('Cartalyst\Sentinel\Users\EloquentUser[roles,persistences,activations,reminders,throttle]');
+        $user         = m::mock('Hedi\Sentinel\Users\EloquentUser[roles,persistences,activations,reminders,throttle]');
         $user->exists = true;
 
         $this->addMockConnection($user);

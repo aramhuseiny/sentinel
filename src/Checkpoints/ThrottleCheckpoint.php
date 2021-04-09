@@ -18,17 +18,17 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Checkpoints;
+namespace Hedi\Sentinel\Checkpoints;
 
-use Cartalyst\Sentinel\Users\UserInterface;
-use Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface;
+use Hedi\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Throttling\ThrottleRepositoryInterface;
 
 class ThrottleCheckpoint implements CheckpointInterface
 {
     /**
      * The Throttle repository instance.
      *
-     * @var \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface
+     * @var \Hedi\Sentinel\Throttling\ThrottleRepositoryInterface
      */
     protected $throttle;
 
@@ -42,7 +42,7 @@ class ThrottleCheckpoint implements CheckpointInterface
     /**
      * Constructor.
      *
-     * @param \Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface $throttle
+     * @param \Hedi\Sentinel\Throttling\ThrottleRepositoryInterface $throttle
      * @param string                                                     $ipAddress
      *
      * @return void
@@ -93,7 +93,7 @@ class ThrottleCheckpoint implements CheckpointInterface
      * Checks the throttling status of the given user.
      *
      * @param string                                       $action
-     * @param \Cartalyst\Sentinel\Users\UserInterface|null $user
+     * @param \Hedi\Sentinel\Users\UserInterface|null $user
      *
      * @return bool
      */
@@ -144,7 +144,7 @@ class ThrottleCheckpoint implements CheckpointInterface
      * @param string $type
      * @param int    $delay
      *
-     * @throws \Cartalyst\Sentinel\Checkpoints\ThrottlingException
+     * @throws \Hedi\Sentinel\Checkpoints\ThrottlingException
      *
      * @return void
      */

@@ -18,25 +18,25 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests;
+namespace Hedi\Sentinel\Tests;
 
 use Mockery as m;
 use RuntimeException;
 use BadMethodCallException;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Sentinel;
-use Cartalyst\Sentinel\Roles\EloquentRole;
-use Cartalyst\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Sentinel;
+use Hedi\Sentinel\Roles\EloquentRole;
+use Hedi\Sentinel\Users\EloquentUser;
 use Illuminate\Contracts\Events\Dispatcher;
-use Cartalyst\Sentinel\Roles\RoleRepositoryInterface;
-use Cartalyst\Sentinel\Users\UserRepositoryInterface;
-use Cartalyst\Sentinel\Activations\ActivationInterface;
-use Cartalyst\Sentinel\Checkpoints\CheckpointInterface;
-use Cartalyst\Sentinel\Reminders\ReminderRepositoryInterface;
-use Cartalyst\Sentinel\Throttling\ThrottleRepositoryInterface;
-use Cartalyst\Sentinel\Activations\ActivationRepositoryInterface;
-use Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface;
+use Hedi\Sentinel\Roles\RoleRepositoryInterface;
+use Hedi\Sentinel\Users\UserRepositoryInterface;
+use Hedi\Sentinel\Activations\ActivationInterface;
+use Hedi\Sentinel\Checkpoints\CheckpointInterface;
+use Hedi\Sentinel\Reminders\ReminderRepositoryInterface;
+use Hedi\Sentinel\Throttling\ThrottleRepositoryInterface;
+use Hedi\Sentinel\Activations\ActivationRepositoryInterface;
+use Hedi\Sentinel\Persistences\PersistenceRepositoryInterface;
 
 class SentinelTest extends TestCase
 {
@@ -50,35 +50,35 @@ class SentinelTest extends TestCase
     /**
      * The Sentinel instance.
      *
-     * @var \Cartalyst\Sentinel\Sentinel
+     * @var \Hedi\Sentinel\Sentinel
      */
     protected $sentinel;
 
     /**
      * The Users repository instance.
      *
-     * @var \Cartalyst\Sentinel\Users\UserRepositoryInterface
+     * @var \Hedi\Sentinel\Users\UserRepositoryInterface
      */
     protected $users;
 
     /**
      * The Roles repository instance.
      *
-     * @var \Cartalyst\Sentinel\Roles\RoleRepositoryInterface
+     * @var \Hedi\Sentinel\Roles\RoleRepositoryInterface
      */
     protected $roles;
 
     /**
      * The Activations repository instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\ActivationRepositoryInterface
+     * @var \Hedi\Sentinel\Activations\ActivationRepositoryInterface
      */
     protected $activations;
 
     /**
      * The Persistences repository instance.
      *
-     * @var \Cartalyst\Sentinel\Persistences\PersistenceRepositoryInterface
+     * @var \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface
      */
     protected $persistences;
 
@@ -814,7 +814,7 @@ class SentinelTest extends TestCase
     public function an_exception_will_be_thrown_when_calling_methods_which_are_only_available_when_a_user_is_logged_in()
     {
         $this->expectException(BadMethodCallException::class);
-        $this->expectExceptionMessage('Method Cartalyst\Sentinel\Sentinel::getRoles() can only be called if a user is logged in.');
+        $this->expectExceptionMessage('Method Hedi\Sentinel\Sentinel::getRoles() can only be called if a user is logged in.');
 
         $this->persistences->shouldReceive('check')->once()->andReturn(null);
 
@@ -825,7 +825,7 @@ class SentinelTest extends TestCase
     public function an_exception_will_be_thrown_when_calling_invalid_methods()
     {
         $this->expectException(BadMethodCallException::class);
-        $this->expectExceptionMessage('Call to undefined method Cartalyst\Sentinel\Sentinel::methodThatDoesntExist()');
+        $this->expectExceptionMessage('Call to undefined method Hedi\Sentinel\Sentinel::methodThatDoesntExist()');
 
         $this->sentinel->methodThatDoesntExist();
     }

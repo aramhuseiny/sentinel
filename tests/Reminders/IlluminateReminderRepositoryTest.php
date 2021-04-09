@@ -18,22 +18,22 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Reminders;
+namespace Hedi\Sentinel\Tests\Reminders;
 
 use Mockery as m;
 use Carbon\Carbon;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Eloquent\Builder;
-use Cartalyst\Sentinel\Reminders\EloquentReminder;
-use Cartalyst\Sentinel\Users\IlluminateUserRepository;
-use Cartalyst\Sentinel\Reminders\IlluminateReminderRepository;
+use Hedi\Sentinel\Reminders\EloquentReminder;
+use Hedi\Sentinel\Users\IlluminateUserRepository;
+use Hedi\Sentinel\Reminders\IlluminateReminderRepository;
 
 class IlluminateReminderRepositoryTest extends TestCase
 {
     /**
      * The User Repository instance.
      *
-     * @var \Cartalyst\Sentinel\Users\IlluminateUserRepository
+     * @var \Hedi\Sentinel\Users\IlluminateUserRepository
      */
     protected $users;
 
@@ -47,14 +47,14 @@ class IlluminateReminderRepositoryTest extends TestCase
     /**
      * The Eloquent Reminder instance.
      *
-     * @var \Cartalyst\Sentinel\Reminders\EloquentReminder
+     * @var \Hedi\Sentinel\Reminders\EloquentReminder
      */
     protected $model;
 
     /**
      * The Reminder Repository instance.
      *
-     * @var \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository
+     * @var \Hedi\Sentinel\Reminders\IlluminateReminderRepository
      */
     protected $reminders;
 
@@ -70,7 +70,7 @@ class IlluminateReminderRepositoryTest extends TestCase
         $this->model = m::mock(EloquentReminder::class);
         $this->model->shouldReceive('newQuery')->andReturn($this->query);
 
-        $this->reminders = m::mock('Cartalyst\Sentinel\Reminders\IlluminateReminderRepository[createModel]', [$this->users]);
+        $this->reminders = m::mock('Hedi\Sentinel\Reminders\IlluminateReminderRepository[createModel]', [$this->users]);
         $this->reminders->shouldReceive('createModel')->andReturn($this->model);
     }
 
@@ -211,7 +211,7 @@ class IlluminateReminderRepositoryTest extends TestCase
 
     protected function getUserMock()
     {
-        $user = m::mock('Cartalyst\Sentinel\Users\EloquentUser');
+        $user = m::mock('Hedi\Sentinel\Users\EloquentUser');
 
         $user->shouldReceive('getUserId')->once()->andReturn(1);
 

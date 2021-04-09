@@ -18,12 +18,12 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Permissions;
+namespace Hedi\Sentinel\Tests\Permissions;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Permissions\PermissionsTrait;
-use Cartalyst\Sentinel\Permissions\PermissionsInterface;
+use Hedi\Sentinel\Permissions\PermissionsTrait;
+use Hedi\Sentinel\Permissions\PermissionsInterface;
 
 class PermissionsTraitTest extends TestCase
 {

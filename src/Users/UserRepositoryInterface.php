@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Users;
+namespace Hedi\Sentinel\Users;
 
 use Closure;
 
@@ -29,7 +29,7 @@ interface UserRepositoryInterface
      *
      * @param int $id
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface|null
+     * @return \Hedi\Sentinel\Users\UserInterface|null
      */
     public function findById(int $id): ?UserInterface;
 
@@ -38,7 +38,7 @@ interface UserRepositoryInterface
      *
      * @param array $credentials
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface|null
+     * @return \Hedi\Sentinel\Users\UserInterface|null
      */
     public function findByCredentials(array $credentials): ?UserInterface;
 
@@ -47,14 +47,14 @@ interface UserRepositoryInterface
      *
      * @param string $code
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface|null
+     * @return \Hedi\Sentinel\Users\UserInterface|null
      */
     public function findByPersistenceCode(string $code): ?UserInterface;
 
     /**
      * Records a login for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return bool
      */
@@ -63,7 +63,7 @@ interface UserRepositoryInterface
     /**
      * Records a logout for the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return bool
      */
@@ -72,7 +72,7 @@ interface UserRepositoryInterface
     /**
      * Validate the password of the given user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      * @param array                                   $credentials
      *
      * @return bool
@@ -91,7 +91,7 @@ interface UserRepositoryInterface
     /**
      * Validate if the given user is valid for updating.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface|int $user
+     * @param \Hedi\Sentinel\Users\UserInterface|int $user
      * @param array                                       $credentials
      *
      * @return bool
@@ -104,17 +104,17 @@ interface UserRepositoryInterface
      * @param array         $credentials
      * @param \Closure|null $callback
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface|null
+     * @return \Hedi\Sentinel\Users\UserInterface|null
      */
     public function create(array $credentials, Closure $callback = null): ?UserInterface;
 
     /**
      * Updates a user.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface|int $user
+     * @param \Hedi\Sentinel\Users\UserInterface|int $user
      * @param array                                       $credentials
      *
-     * @return \Cartalyst\Sentinel\Users\UserInterface
+     * @return \Hedi\Sentinel\Users\UserInterface
      */
     public function update($user, array $credentials): UserInterface;
 }

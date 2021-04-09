@@ -18,13 +18,13 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Roles;
+namespace Hedi\Sentinel\Tests\Roles;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Connection;
-use Cartalyst\Sentinel\Roles\EloquentRole;
-use Cartalyst\Sentinel\Users\EloquentUser;
+use Hedi\Sentinel\Roles\EloquentRole;
+use Hedi\Sentinel\Users\EloquentUser;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Query\Processors\Processor;
@@ -103,7 +103,7 @@ class EloquentRoleTest extends TestCase
         $users = m::mock(BelongsToMany::class);
         $users->shouldReceive('detach')->once();
 
-        $role         = m::mock('Cartalyst\Sentinel\Roles\EloquentRole[users]');
+        $role         = m::mock('Hedi\Sentinel\Roles\EloquentRole[users]');
         $role->exists = true;
 
         $this->addMockConnection($role);

@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Hashing;
+namespace Hedi\Sentinel\Tests\Hashing;
 
-use Cartalyst\Sentinel\Hashing\NativeHasher;
+use Hedi\Sentinel\Hashing\NativeHasher;
 
 class NativeHasherTest extends BaseHashingTest
 {

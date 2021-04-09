@@ -18,14 +18,14 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Permissions;
+namespace Hedi\Sentinel\Permissions;
 
 interface PermissibleInterface
 {
     /**
      * Returns the Permissions instance.
      *
-     * @return \Cartalyst\Sentinel\Permissions\PermissionsInterface
+     * @return \Hedi\Sentinel\Permissions\PermissionsInterface
      */
     public function getPermissionsInstance(): PermissionsInterface;
 
@@ -35,7 +35,7 @@ interface PermissibleInterface
      * @param string $permission
      * @param bool   $value
      *
-     * @return \Cartalyst\Sentinel\Permissions\PermissibleInterface
+     * @return \Hedi\Sentinel\Permissions\PermissibleInterface
      */
     public function addPermission(string $permission, bool $value = true): PermissibleInterface;
 
@@ -46,7 +46,7 @@ interface PermissibleInterface
      * @param bool   $value
      * @param bool   $create
      *
-     * @return \Cartalyst\Sentinel\Permissions\PermissibleInterface
+     * @return \Hedi\Sentinel\Permissions\PermissibleInterface
      */
     public function updatePermission(string $permission, bool $value = true, bool $create = false): PermissibleInterface;
 
@@ -55,7 +55,7 @@ interface PermissibleInterface
      *
      * @param string $permission
      *
-     * @return \Cartalyst\Sentinel\Permissions\PermissibleInterface
+     * @return \Hedi\Sentinel\Permissions\PermissibleInterface
      */
     public function removePermission(string $permission): PermissibleInterface;
 }

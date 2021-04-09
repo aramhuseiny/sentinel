@@ -18,14 +18,14 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Permissions;
+namespace Hedi\Sentinel\Permissions;
 
 trait PermissibleTrait
 {
     /**
      * The cached permissions instance for the given user.
      *
-     * @var \Cartalyst\Sentinel\Permissions\PermissionsInterface
+     * @var \Hedi\Sentinel\Permissions\PermissionsInterface
      */
     protected $permissionsInstance;
 

@@ -18,18 +18,18 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Activations;
+namespace Hedi\Sentinel\Tests\Activations;
 
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Activations\EloquentActivation;
+use Hedi\Sentinel\Activations\EloquentActivation;
 
 class EloquentActivationTest extends TestCase
 {
     /**
      * The Activation Eloquent instance.
      *
-     * @var \Cartalyst\Sentinel\Activations\EloquentActivation
+     * @var \Hedi\Sentinel\Activations\EloquentActivation
      */
     protected $activation;
 

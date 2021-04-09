@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Laravel\Facades;
+namespace Hedi\Sentinel\Laravel\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

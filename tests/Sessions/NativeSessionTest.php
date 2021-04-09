@@ -18,12 +18,12 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Sessions;
+namespace Hedi\Sentinel\Tests\Sessions;
 
 use stdClass;
 use Mockery as m;
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Sessions\NativeSession;
+use Hedi\Sentinel\Sessions\NativeSession;
 
 class NativeSessionTest extends TestCase
 {

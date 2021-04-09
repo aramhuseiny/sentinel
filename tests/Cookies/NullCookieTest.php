@@ -18,17 +18,17 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Tests\Cookies;
+namespace Hedi\Sentinel\Tests\Cookies;
 
 use PHPUnit\Framework\TestCase;
-use Cartalyst\Sentinel\Cookies\NullCookie;
+use Hedi\Sentinel\Cookies\NullCookie;
 
 class NullCookieTest extends TestCase
 {
     /**
      * The cookie instance.
      *
-     * @var \Cartalyst\Sentinel\Cookies\NullCookie
+     * @var \Hedi\Sentinel\Cookies\NullCookie
      */
     protected $cookie;
 

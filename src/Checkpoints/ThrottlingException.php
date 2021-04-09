@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Checkpoints;
+namespace Hedi\Sentinel\Checkpoints;
 
 use Carbon\Carbon;
 use RuntimeException;

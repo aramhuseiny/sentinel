@@ -18,16 +18,16 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Checkpoints;
+namespace Hedi\Sentinel\Checkpoints;
 
-use Cartalyst\Sentinel\Users\UserInterface;
+use Hedi\Sentinel\Users\UserInterface;
 
 interface CheckpointInterface
 {
     /**
      * Checkpoint after a user is logged in. Return false to deny persistence.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return bool
      */
@@ -36,7 +36,7 @@ interface CheckpointInterface
     /**
      * Checkpoint for when a user is currently stored in the session.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface $user
+     * @param \Hedi\Sentinel\Users\UserInterface $user
      *
      * @return bool
      */
@@ -47,7 +47,7 @@ interface CheckpointInterface
      * passed and the result of the method will not affect anything, as the
      * login failed.
      *
-     * @param \Cartalyst\Sentinel\Users\UserInterface|null $user
+     * @param \Hedi\Sentinel\Users\UserInterface|null $user
      *
      * @return bool
      */

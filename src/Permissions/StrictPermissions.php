@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Permissions;
+namespace Hedi\Sentinel\Permissions;
 
 class StrictPermissions implements PermissionsInterface
 {

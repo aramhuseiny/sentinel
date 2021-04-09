@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Users;
+namespace Hedi\Sentinel\Users;
 
 interface UserInterface
 {

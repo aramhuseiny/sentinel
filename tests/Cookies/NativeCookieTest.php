@@ -18,9 +18,9 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Cookies
+namespace Hedi\Sentinel\Cookies
 {
-    use Cartalyst\Sentinel\Tests\Cookies\NativeCookieTest;
+    use Hedi\Sentinel\Tests\Cookies\NativeCookieTest;
 
     function setcookie($name, $value, $expires, $path, $domain, $secure, $httponly)
     {
@@ -30,11 +30,11 @@ namespace Cartalyst\Sentinel\Cookies
     }
 }
 
-namespace Cartalyst\Sentinel\Tests\Cookies
+namespace Hedi\Sentinel\Tests\Cookies
 {
     use Mockery as m;
     use PHPUnit\Framework\TestCase;
-    use Cartalyst\Sentinel\Cookies\NativeCookie;
+    use Hedi\Sentinel\Cookies\NativeCookie;
 
     class NativeCookieTest extends TestCase
     {

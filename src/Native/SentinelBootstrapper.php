@@ -18,23 +18,23 @@
  * @link       https://cartalyst.com
  */
 
-namespace Cartalyst\Sentinel\Native;
+namespace Hedi\Sentinel\Native;
 
 use InvalidArgumentException;
-use Cartalyst\Sentinel\Sentinel;
+use Hedi\Sentinel\Sentinel;
 use Illuminate\Events\Dispatcher;
-use Cartalyst\Sentinel\Cookies\NativeCookie;
-use Cartalyst\Sentinel\Hashing\NativeHasher;
+use Hedi\Sentinel\Cookies\NativeCookie;
+use Hedi\Sentinel\Hashing\NativeHasher;
 use Symfony\Component\HttpFoundation\Request;
-use Cartalyst\Sentinel\Sessions\NativeSession;
-use Cartalyst\Sentinel\Checkpoints\ThrottleCheckpoint;
-use Cartalyst\Sentinel\Roles\IlluminateRoleRepository;
-use Cartalyst\Sentinel\Users\IlluminateUserRepository;
-use Cartalyst\Sentinel\Checkpoints\ActivationCheckpoint;
-use Cartalyst\Sentinel\Reminders\IlluminateReminderRepository;
-use Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository;
-use Cartalyst\Sentinel\Activations\IlluminateActivationRepository;
-use Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository;
+use Hedi\Sentinel\Sessions\NativeSession;
+use Hedi\Sentinel\Checkpoints\ThrottleCheckpoint;
+use Hedi\Sentinel\Roles\IlluminateRoleRepository;
+use Hedi\Sentinel\Users\IlluminateUserRepository;
+use Hedi\Sentinel\Checkpoints\ActivationCheckpoint;
+use Hedi\Sentinel\Reminders\IlluminateReminderRepository;
+use Hedi\Sentinel\Throttling\IlluminateThrottleRepository;
+use Hedi\Sentinel\Activations\IlluminateActivationRepository;
+use Hedi\Sentinel\Persistences\IlluminatePersistenceRepository;
 
 class SentinelBootstrapper
 {
@@ -71,7 +71,7 @@ class SentinelBootstrapper
     /**
      * Creates a sentinel instance.
      *
-     * @return \Cartalyst\Sentinel\Sentinel
+     * @return \Hedi\Sentinel\Sentinel
      */
     public function createSentinel()
     {
@@ -113,7 +113,7 @@ class SentinelBootstrapper
     /**
      * Creates a persistences repository.
      *
-     * @return \Cartalyst\Sentinel\Persistences\IlluminatePersistenceRepository
+     * @return \Hedi\Sentinel\Persistences\IlluminatePersistenceRepository
      */
     protected function createPersistence()
     {
@@ -137,7 +137,7 @@ class SentinelBootstrapper
     /**
      * Creates a session.
      *
-     * @return \Cartalyst\Sentinel\Sessions\NativeSession
+     * @return \Hedi\Sentinel\Sessions\NativeSession
      */
     protected function createSession()
     {
@@ -147,7 +147,7 @@ class SentinelBootstrapper
     /**
      * Creates a cookie.
      *
-     * @return \Cartalyst\Sentinel\Cookies\NativeCookie
+     * @return \Hedi\Sentinel\Cookies\NativeCookie
      */
     protected function createCookie()
     {
@@ -157,7 +157,7 @@ class SentinelBootstrapper
     /**
      * Creates a user repository.
      *
-     * @return \Cartalyst\Sentinel\Users\IlluminateUserRepository
+     * @return \Hedi\Sentinel\Users\IlluminateUserRepository
      */
     protected function createUsers()
     {
@@ -183,7 +183,7 @@ class SentinelBootstrapper
     /**
      * Creates a hasher.
      *
-     * @return \Cartalyst\Sentinel\Hashing\NativeHasher
+     * @return \Hedi\Sentinel\Hashing\NativeHasher
      */
     protected function createHasher()
     {
@@ -193,7 +193,7 @@ class SentinelBootstrapper
     /**
      * Creates a role repository.
      *
-     * @return \Cartalyst\Sentinel\Roles\IlluminateRoleRepository
+     * @return \Hedi\Sentinel\Roles\IlluminateRoleRepository
      */
     protected function createRoles()
     {
@@ -211,7 +211,7 @@ class SentinelBootstrapper
     /**
      * Creates an activation repository.
      *
-     * @return \Cartalyst\Sentinel\Activations\IlluminateActivationRepository
+     * @return \Hedi\Sentinel\Activations\IlluminateActivationRepository
      */
     protected function createActivations()
     {
@@ -237,9 +237,9 @@ class SentinelBootstrapper
     /**
      * Create an activation checkpoint.
      *
-     * @param \Cartalyst\Sentinel\Activations\IlluminateActivationRepository $activations
+     * @param \Hedi\Sentinel\Activations\IlluminateActivationRepository $activations
      *
-     * @return \Cartalyst\Sentinel\Checkpoints\ActivationCheckpoint
+     * @return \Hedi\Sentinel\Checkpoints\ActivationCheckpoint
      */
     protected function createActivationCheckpoint(IlluminateActivationRepository $activations)
     {
@@ -249,8 +249,8 @@ class SentinelBootstrapper
     /**
      * Create activation and throttling checkpoints.
      *
-     * @param \Cartalyst\Sentinel\Activations\IlluminateActivationRepository $activations
-     * @param \Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository    $throttle
+     * @param \Hedi\Sentinel\Activations\IlluminateActivationRepository $activations
+     * @param \Hedi\Sentinel\Throttling\IlluminateThrottleRepository    $throttle
      * @param string                                                         $ipAddress
      *
      * @throws \InvalidArgumentException
@@ -281,10 +281,10 @@ class SentinelBootstrapper
     /**
      * Create a throttle checkpoint.
      *
-     * @param \Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository $throttle
+     * @param \Hedi\Sentinel\Throttling\IlluminateThrottleRepository $throttle
      * @param string                                                      $ipAddress
      *
-     * @return \Cartalyst\Sentinel\Checkpoints\ThrottleCheckpoint
+     * @return \Hedi\Sentinel\Checkpoints\ThrottleCheckpoint
      */
     protected function createThrottleCheckpoint(IlluminateThrottleRepository $throttle, $ipAddress)
     {
@@ -294,7 +294,7 @@ class SentinelBootstrapper
     /**
      * Create a throttling repository.
      *
-     * @return \Cartalyst\Sentinel\Throttling\IlluminateThrottleRepository
+     * @return \Hedi\Sentinel\Throttling\IlluminateThrottleRepository
      */
     protected function createThrottling()
     {
@@ -334,9 +334,9 @@ class SentinelBootstrapper
     /**
      * Create a reminder repository.
      *
-     * @param \Cartalyst\Sentinel\Users\IlluminateUserRepository $users
+     * @param \Hedi\Sentinel\Users\IlluminateUserRepository $users
      *
-     * @return \Cartalyst\Sentinel\Reminders\IlluminateReminderRepository
+     * @return \Hedi\Sentinel\Reminders\IlluminateReminderRepository
      */
     protected function createReminders(IlluminateUserRepository $users)
     {

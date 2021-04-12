@@ -20,6 +20,7 @@
 
 namespace Hedi\Sentinel\Roles;
 
+use Hedi\Sentinel\Positions\EloquentPositions;
 use IteratorAggregate;
 use Illuminate\Database\Eloquent\Model;
 use Hedi\Sentinel\Users\EloquentUser;
@@ -60,11 +61,11 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
     ];
 
     /**
-     * The Users model FQCN.
+     * The Positions model FQCN.
      *
      * @var string
      */
-    protected static $usersModel = EloquentUser::class;
+    protected static $positionsModel = EloquentPositions::class;
 
     /**
      * {@inheritdoc}
@@ -83,9 +84,18 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function users(): BelongsToMany
+    /*public function users(): BelongsToMany
     {
         return $this->belongsToMany(static::$usersModel, 'role_users', 'role_id', 'user_id')->withTimestamps();
+    }*/
+    /**
+     * The Users relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function positions(): BelongsToMany
+    {
+        return $this->belongsToMany(static::$positionsModel, 'role_positions', 'role_id', 'position_id')->withTimestamps();
     }
 
     /**
@@ -102,30 +112,6 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
     public function getRoleSlug(): string
     {
         return $this->slug;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getUsers(): IteratorAggregate
-    {
-        return $this->users;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getUsersModel(): string
-    {
-        return static::$usersModel;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function setUsersModel(string $usersModel): void
-    {
-        static::$usersModel = $usersModel;
     }
 
     /**
@@ -155,5 +141,29 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
     protected function createPermissions(): PermissionsInterface
     {
         return new static::$permissionsClass($this->getPermissions());
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPositions(): IteratorAggregate
+    {
+        return $this->positions;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getPositionsModel(): string
+    {
+        return static::$positionsModel;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function setPositionsModel(string $positionsModel): void
+    {
+        static::$positionsModel = $positionsModel;
     }
 }

@@ -25,7 +25,7 @@ use PHPUnit\Framework\TestCase;
 use Illuminate\Database\Connection;
 use Illuminate\Database\Query\Builder;
 use Hedi\Sentinel\Users\EloquentUser;
-use Hedi\Sentinel\Roles\RoleInterface;
+use Hedi\Sentinel\Roles\PositionInterface;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Query\Grammars\Grammar;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -314,10 +314,10 @@ class EloquentUserTest extends TestCase
         $this->user->getConnection()->getQueryGrammar()->shouldReceive('compileSelect');
         $this->user->getConnection()->shouldReceive('select');
 
-        $role1 = m::mock(RoleInterface::class);
-        $role2 = m::mock(RoleInterface::class);
-        $role3 = m::mock(RoleInterface::class);
-        $role4 = m::mock(RoleInterface::class);
+        $role1 = m::mock(PositionInterface::class);
+        $role2 = m::mock(PositionInterface::class);
+        $role3 = m::mock(PositionInterface::class);
+        $role4 = m::mock(PositionInterface::class);
 
         $role1->shouldReceive('getRoleId')->once()->andReturn(1);
         $role2->shouldReceive('getRoleId')->once()->andReturn(2);
@@ -348,13 +348,13 @@ class EloquentUserTest extends TestCase
         $this->user->getConnection()->getQueryGrammar()->shouldReceive('compileSelect');
         $this->user->getConnection()->shouldReceive('select');
 
-        $foobar = m::mock(RoleInterface::class);
-        $foo    = m::mock(RoleInterface::class);
-        $bar    = m::mock(RoleInterface::class);
-        $baz    = m::mock(RoleInterface::class);
-        $abc    = m::mock(RoleInterface::class);
-        $def    = m::mock(RoleInterface::class);
-        $ghi    = m::mock(RoleInterface::class);
+        $foobar = m::mock(PositionInterface::class);
+        $foo    = m::mock(PositionInterface::class);
+        $bar    = m::mock(PositionInterface::class);
+        $baz    = m::mock(PositionInterface::class);
+        $abc    = m::mock(PositionInterface::class);
+        $def    = m::mock(PositionInterface::class);
+        $ghi    = m::mock(PositionInterface::class);
 
         $foobar->shouldReceive('getRoleId')->once()->andReturn(1);
         $foo->shouldReceive('getRoleId')->once()->andReturn(2);

@@ -53,6 +53,38 @@ return [
     'users' => [
         'model' => 'Hedi\Sentinel\Users\EloquentUser',
     ],
+    /*
+    |--------------------------------------------------------------------------
+    | login names that user can login by them in the system
+    |be careful if you want to add custom attribute to this list you should edit migration file too
+     */
+    'login_names' => ['email'],
+
+    /*
+    |--------------------------------------------------------------------------
+    | list of attributes for user
+    | be careful if you want to add custom attribute to this list you should edit migration file too
+     */
+    'user_attributes' => [
+        'email',
+        'password',
+        'last_name',
+        'first_name',
+        'permissions',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Positions
+    |--------------------------------------------------------------------------
+    |
+    | Please provide the role model used in Sentinel.
+    |
+    */
+
+    'positions' => [
+        'model' => 'Hedi\Sentinel\Positions\EloquentPositions',
+    ],
 
     /*
     |--------------------------------------------------------------------------

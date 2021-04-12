@@ -106,7 +106,6 @@ class IlluminateUserRepository implements UserRepositoryInterface
                 }
             });
         }
-
         return $query->first();
     }
 

@@ -18,47 +18,34 @@
  * @link       https://cartalyst.com
  */
 
-namespace Hedi\Sentinel\Roles;
+namespace Hedi\Sentinel\Positions;
 
 use IteratorAggregate;
 
-interface RoleInterface
+interface PositionableInterface
 {
     /**
-     * Returns the role's primary key.
-     *
-     * @return int
-     */
-    public function getRoleId(): int;
-
-    /**
-     * Returns the role's slug.
-     *
-     * @return string
-     */
-    public function getRoleSlug(): string;
-
-    /**
-     * Returns all users for the position.
+     * Returns all the associated roles.
      *
      * @return \IteratorAggregate
      */
     public function getPositions(): IteratorAggregate;
 
     /**
-     * Returns the positions model.
+     * Checks if the user is in the given role.
      *
-     * @return string
+     * @param mixed $position
+     *
+     * @return bool
      */
-    public static function getPositionsModel(): string;
-
+    public function inPosition($position): bool;
 
     /**
-     * Sets the positions model.
+     * Checks if the user is in any of the given roles.
      *
-     * @param string $positionsModel
+     * @param array $positions
      *
-     * @return void
+     * @return bool
      */
-    public static function setPositionsModel(string $positionsModel): void;
+    public function inAnyPosition(array $positions): bool;
 }

@@ -74,14 +74,34 @@ class MigrationCartalystSentinel extends Migration
             $table->unique('slug');
         });
 
-        Schema::create('role_users', function (Blueprint $table) {
-            $table->integer('user_id')->unsigned();
+        Schema::create('positions', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('name');
+            $table->integer('parent')->default(0);
+            $table->timestamps();
+
+            $table->engine = 'InnoDB';
+        });
+
+
+        Schema::create('role_positions', function (Blueprint $table) {
+            $table->integer('position_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
-            $table->primary(['user_id', 'role_id']);
+            $table->primary(['position_id', 'role_id']);
         });
+
+//
+//        Schema::create('role_users', function (Blueprint $table) {
+//            $table->integer('user_id')->unsigned();
+//            $table->integer('role_id')->unsigned();
+//            $table->nullableTimestamps();
+//
+//            $table->engine = 'InnoDB';
+//            $table->primary(['user_id', 'role_id']);
+//        });
 
         Schema::create('throttle', function (Blueprint $table) {
             $table->increments('id');
@@ -106,6 +126,16 @@ class MigrationCartalystSentinel extends Migration
 
             $table->engine = 'InnoDB';
             $table->unique('email');
+        });
+
+
+        Schema::create('user_positions', function (Blueprint $table) {
+            $table->integer('position_id')->unsigned();
+            $table->integer('user_id')->unsigned();
+            $table->nullableTimestamps();
+
+            $table->engine = 'InnoDB';
+            $table->primary(['position_id', 'user_id']);
         });
     }
 

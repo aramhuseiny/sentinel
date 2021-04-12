@@ -21,6 +21,7 @@
 namespace Hedi\Sentinel\Laravel;
 
 use Exception;
+use Hedi\Sentinel\Roles\IlluminateRoleRepository;
 use InvalidArgumentException;
 use Hedi\Sentinel\Sentinel;
 use Illuminate\Support\ServiceProvider;
@@ -29,7 +30,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Hedi\Sentinel\Cookies\IlluminateCookie;
 use Hedi\Sentinel\Sessions\IlluminateSession;
 use Hedi\Sentinel\Checkpoints\ThrottleCheckpoint;
-use Hedi\Sentinel\Roles\IlluminateRoleRepository;
+use Hedi\Sentinel\Positions\IlluminatePositionRepository;
 use Hedi\Sentinel\Users\IlluminateUserRepository;
 use Hedi\Sentinel\Checkpoints\ActivationCheckpoint;
 use Hedi\Sentinel\Reminders\IlluminateReminderRepository;
@@ -56,6 +57,7 @@ class SentinelServiceProvider extends ServiceProvider
         $this->prepareResources();
         $this->registerPersistences();
         $this->registerUsers();
+        $this->registerPositions();
         $this->registerRoles();
         $this->registerCheckpoints();
         $this->registerReminders();
@@ -183,6 +185,21 @@ class SentinelServiceProvider extends ServiceProvider
             $config = $app['config']->get('cartalyst.sentinel.roles');
 
             return new IlluminateRoleRepository($config['model']);
+        });
+    }
+
+
+    /**
+     * Registers the positions.
+     *
+     * @return void
+     */
+    protected function registerPositions()
+    {
+        $this->app->singleton('sentinel.positions', function ($app) {
+            $config = $app['config']->get('cartalyst.sentinel.positions');
+
+            return new IlluminatePositionRepository($config['model']);
         });
     }
 
@@ -319,6 +336,7 @@ class SentinelServiceProvider extends ServiceProvider
             $sentinel = new Sentinel(
                 $app['sentinel.persistence'],
                 $app['sentinel.users'],
+                $app['sentinel.positions'],
                 $app['sentinel.roles'],
                 $app['sentinel.activations'],
                 $app['events']
@@ -370,6 +388,7 @@ class SentinelServiceProvider extends ServiceProvider
             'sentinel.persistence',
             'sentinel.hasher',
             'sentinel.users',
+            'sentinel.positions',
             'sentinel.roles',
             'sentinel.activations',
             'sentinel.checkpoint.activation',
@@ -456,13 +475,16 @@ class SentinelServiceProvider extends ServiceProvider
 
         $users = $config['users']['model'];
 
+        $positions = $config['positions']['model'];
+
         $roles = $config['roles']['model'];
 
         $persistences = $config['persistences']['model'];
 
         if (class_exists($users)) {
-            if (method_exists($users, 'setRolesModel')) {
-                forward_static_call_array([$users, 'setRolesModel'], [$roles]);
+
+            if (method_exists($users, 'setPositionsModel')) {
+                forward_static_call_array([$users, 'setPositionsModel'], [$positions]);
             }
 
             if (method_exists($users, 'setPersistencesModel')) {
@@ -472,6 +494,10 @@ class SentinelServiceProvider extends ServiceProvider
             if (method_exists($users, 'setPermissionsClass')) {
                 forward_static_call_array([$users, 'setPermissionsClass'], [$config['permissions']['class']]);
             }
+        }
+
+        if (class_exists($positions) && method_exists($roles, 'setUsersModel')) {
+            forward_static_call_array([$positions, 'setUsersModel'], [$users]);
         }
 
         if (class_exists($roles) && method_exists($roles, 'setUsersModel')) {

@@ -38,7 +38,7 @@ class EloquentRoleTest extends TestCase
      */
     protected function setUp(): void
     {
-        $this->role = new EloquentRole();
+        $this->role = new EloquentPosition();
     }
 
     /**
@@ -54,9 +54,9 @@ class EloquentRoleTest extends TestCase
     /** @test */
     public function it_can_set_and_get_the_users_model_fqcn()
     {
-        EloquentRole::setUsersModel(EloquentUser::class);
+        EloquentPosition::setUsersModel(EloquentUser::class);
 
-        $this->assertSame(EloquentUser::class, EloquentRole::getUsersModel());
+        $this->assertSame(EloquentUser::class, EloquentPosition::getUsersModel());
     }
 
     /** @test */

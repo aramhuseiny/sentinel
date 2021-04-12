@@ -21,6 +21,7 @@
 namespace Hedi\Sentinel;
 
 use Closure;
+use Hedi\Sentinel\Roles\RoleRepositoryInterface;
 use RuntimeException;
 use BadMethodCallException;
 use Illuminate\Support\Str;
@@ -28,7 +29,7 @@ use InvalidArgumentException;
 use Cartalyst\Support\Traits\EventTrait;
 use Hedi\Sentinel\Users\UserInterface;
 use Illuminate\Contracts\Events\Dispatcher;
-use Hedi\Sentinel\Roles\RoleRepositoryInterface;
+use Hedi\Sentinel\Positions\PositionRepositoryInterface;
 use Hedi\Sentinel\Users\UserRepositoryInterface;
 use Hedi\Sentinel\Checkpoints\CheckpointInterface;
 use Hedi\Sentinel\Reminders\ReminderRepositoryInterface;
@@ -60,6 +61,13 @@ class Sentinel
      * @var \Hedi\Sentinel\Users\UserRepositoryInterface
      */
     protected $users;
+
+    /**
+     * The Positions repository instance.
+     *
+     * @var \Hedi\Sentinel\Positions\PositionRepositoryInterface
+     */
+    protected $positions;
 
     /**
      * The Roles repository instance.
@@ -130,6 +138,7 @@ class Sentinel
      * @param \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
      * @param \Hedi\Sentinel\Users\UserRepositoryInterface               $users
      * @param \Hedi\Sentinel\Roles\RoleRepositoryInterface               $roles
+     * @param \Hedi\Sentinel\Positions\PositionRepositoryInterface       $positions
      * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface   $activations
      * @param \Illuminate\Contracts\Events\Dispatcher                         $dispatcher
      *
@@ -138,11 +147,14 @@ class Sentinel
     public function __construct(
         PersistenceRepositoryInterface $persistences,
         UserRepositoryInterface $users,
+        PositionRepositoryInterface $positions,
         RoleRepositoryInterface $roles,
         ActivationRepositoryInterface $activations,
         Dispatcher $dispatcher
     ) {
         $this->users = $users;
+
+        $this->positions = $positions;
 
         $this->roles = $roles;
 
@@ -301,6 +313,7 @@ class Sentinel
         if ($response === false) {
             return false;
         }
+
 
         if ($credentials instanceof UserInterface) {
             $user = $credentials;
@@ -762,6 +775,28 @@ class Sentinel
     }
 
     /**
+     * Returns the position repository.
+     *
+     * @return \Hedi\Sentinel\Positions\PositionRepositoryInterface
+     */
+    public function getPositionRepository(): PositionRepositoryInterface
+    {
+        return $this->positions;
+    }
+
+    /**
+     * Sets the position repository.
+     *
+     * @param \Hedi\Sentinel\Positions\PositionRepositoryInterface $positions
+     *
+     * @return void
+     */
+    public function setPositionRepository(PositionRepositoryInterface $positions): void
+    {
+        $this->positions = $positions;
+    }
+
+    /**
      * Returns the role repository.
      *
      * @return \Hedi\Sentinel\Roles\RoleRepositoryInterface
@@ -923,6 +958,14 @@ class Sentinel
             $method = 'findBy'.substr($method, 10);
 
             return call_user_func_array([$roles, $method], $parameters);
+        }
+
+        if (Str::startsWith($method, 'findPositionBy')) {
+            $positions = $this->getPositionRepository();
+
+            $method = 'findBy'.substr($method, 10);
+
+            return call_user_func_array([$positions, $method], $parameters);
         }
 
         $methods = ['getRoles', 'inRole', 'inAnyRole', 'hasAccess', 'hasAnyAccess'];

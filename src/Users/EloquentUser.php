@@ -20,12 +20,14 @@
 
 namespace Hedi\Sentinel\Users;
 
+use Hedi\Sentinel\Positions\EloquentPositions;
+use Hedi\Sentinel\Positions\PositionableInterface;
+use Hedi\Sentinel\Positions\PositionInterface;
+use Hedi\Sentinel\Roles\RoleableInterface;
+use Illuminate\Database\Eloquent\Collection;
 use IteratorAggregate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
-use Hedi\Sentinel\Roles\EloquentRole;
-use Hedi\Sentinel\Roles\RoleInterface;
-use Hedi\Sentinel\Roles\RoleableInterface;
 use Hedi\Sentinel\Reminders\EloquentReminder;
 use Hedi\Sentinel\Throttling\EloquentThrottle;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -37,7 +39,7 @@ use Hedi\Sentinel\Persistences\EloquentPersistence;
 use Hedi\Sentinel\Persistences\PersistableInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, RoleableInterface, UserInterface
+class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, PositionableInterface, UserInterface
 {
     use PermissibleTrait;
 
@@ -53,6 +55,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      *
      * @var array
      */
+//    protected $fillable = config('sentinel.userattributes');
     protected $fillable = [
         'email',
         'password',
@@ -92,14 +95,15 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      *
      * @var array
      */
-    protected $loginNames = ['email'];
+//    protected $loginNames = config('sentinel.login_names');
+    protected $loginNames = ['email','username'];
 
     /**
-     * The Roles model FQCN.
+     * The Positions model FQCN.
      *
      * @var string
      */
-    protected static $rolesModel = EloquentRole::class;
+    protected static $positionsModel = EloquentPositions::class;
 
     /**
      * The Persistences model FQCN.
@@ -164,9 +168,27 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function roles(): BelongsToMany
+    public function positions(): BelongsToMany
     {
-        return $this->belongsToMany(static::$rolesModel, 'role_users', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(static::$positionsModel, 'user_positions', 'user_id', 'position_id')->withTimestamps();
+    }
+
+    /**
+     * Returns the roles relationship.
+     *
+     * @return Collection|\Illuminate\Support\Collection
+     */
+    public function roles()
+    {
+        $roles = [];
+        $positions = $this->positions;
+        foreach ( $positions as $position)
+        {
+            $roles[] = $position->getRoles();
+        }
+
+        return collect($roles);
+//        return $this->belongsToMany(static::$positionsModel, 'role_users', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**
@@ -187,52 +209,6 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     public function getLoginNames(): array
     {
         return $this->loginNames;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRoles(): IteratorAggregate
-    {
-        return $this->roles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function inRole($role): bool
-    {
-        if ($role instanceof RoleInterface) {
-            $roleId = $role->getRoleId();
-        }
-
-        foreach ($this->roles as $instance) {
-            if ($role instanceof RoleInterface) {
-                if ($instance->getRoleId() === $roleId) {
-                    return true;
-                }
-            } else {
-                if ($instance->getRoleId() == $role || $instance->getRoleSlug() == $role) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function inAnyRole(array $roles): bool
-    {
-        foreach ($roles as $role) {
-            if ($this->inRole($role)) {
-                return true;
-            }
-        }
-
-        return false;
     }
 
     /**
@@ -320,21 +296,21 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      *
      * @return string
      */
-    public static function getRolesModel(): string
+    public static function getPositionsModel(): string
     {
-        return static::$rolesModel;
+        return static::$positionsModel;
     }
 
     /**
      * Sets the roles model.
      *
-     * @param string $rolesModel
+     * @param string $positionsModel
      *
      * @return void
      */
-    public static function setRolesModel(string $rolesModel): void
+    public static function setPositionsModel(string $positionsModel): void
     {
-        static::$rolesModel = $rolesModel;
+        static::$positionsModel = $positionsModel;
     }
 
     /**
@@ -438,7 +414,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
             $this->activations()->delete();
             $this->persistences()->delete();
             $this->reminders()->delete();
-            $this->roles()->detach();
+            $this->positions()->detach();
             $this->throttle()->delete();
         }
 
@@ -477,10 +453,69 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
 
         $rolePermissions = [];
 
-        foreach ($this->roles as $role) {
-            $rolePermissions[] = $role->getPermissions();
+        foreach ( $this->positions as $position){
+            foreach ($position->roles as $role) {
+                $rolePermissions[] = $role->getPermissions();
+            }
         }
 
+
         return new static::$permissionsClass($userPermissions, $rolePermissions);
+    }
+
+    public function getPositions(): IteratorAggregate
+    {
+        return $this->positions;
+    }
+
+    public function inPosition($position): bool
+    {
+        if ($position instanceof PositionInterface) {
+            $positionId = $position->getPositionId();
+        }
+
+        foreach ($this->positions as $instance) {
+            if ($position instanceof PositionInterface) {
+                if ($instance->getPositionId() === $positionId) {
+                    return true;
+                }
+            } else {
+                if ($instance->getPositionId() == $position) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    public function inAnyPosition(array $positions): bool
+    {
+        foreach ($positions as $position) {
+            if ($this->inPosition($position)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * @param $role
+     * @return bool
+     */
+    public function inRole( $role ) : bool
+    {
+        $has_role = false;
+        $positions = $this->positions;
+
+        foreach ( $positions as $position)
+        {
+            $has_role = $position->inRole($role);
+            if($has_role == true ) {
+                return true;
+            }
+        }
+        return $has_role;
     }
 }

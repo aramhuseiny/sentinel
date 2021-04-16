@@ -5,9 +5,11 @@ namespace Hedi\Sentinel\SQL;
 
 
 use Hedi\Sentinel\Models\UserPositions;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 use Sentinel;
 
 class QueryWrapper
@@ -57,6 +59,17 @@ class QueryWrapper
             }
         }
         $wrapper_query .= " " . $wrapper_where;
-        return  $wrapper_query;
+        return  DB::select($wrapper_query);
+    }
+
+    /**
+     * @param Builder $query
+     * @return array|null
+     * create wrapper for eloquent query
+     */
+    public static function eloquentSelect( Builder $query )
+    {
+        $sql = Str::replaceArray('?', $query->getBindings(), $query->toSql());
+        return self::select( $sql );
     }
 }

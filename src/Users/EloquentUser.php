@@ -180,15 +180,21 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      */
     public function roles()
     {
-        $roles = [];
+        $positions_roles = [];
         $positions = $this->positions;
         foreach ( $positions as $position)
         {
-            $roles[] = $position->getRoles();
+            $positions_roles[] = $position->getRoles();
+        }
+
+        $roles = [];
+        foreach ( $positions_roles as $position_roles)
+        {
+            foreach ( $position_roles as $position_role )
+                $roles[] = $position_role;
         }
 
         return collect($roles);
-//        return $this->belongsToMany(static::$positionsModel, 'role_users', 'user_id', 'role_id')->withTimestamps();
     }
 
     /**

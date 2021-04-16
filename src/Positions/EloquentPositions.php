@@ -52,6 +52,7 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
      */
     protected $fillable = [
         'name',
+        'mapped_model',
         'parent',
     ];
 

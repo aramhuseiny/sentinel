@@ -78,6 +78,7 @@ class MigrationCartalystSentinel extends Migration
             $table->increments('id');
             $table->string('name');
             $table->integer('parent')->default(0);
+            $table->string('mapped_model')->nullable();
             $table->timestamps();
 
             $table->engine = 'InnoDB';
@@ -92,16 +93,6 @@ class MigrationCartalystSentinel extends Migration
             $table->engine = 'InnoDB';
             $table->primary(['position_id', 'role_id']);
         });
-
-//
-//        Schema::create('role_users', function (Blueprint $table) {
-//            $table->integer('user_id')->unsigned();
-//            $table->integer('role_id')->unsigned();
-//            $table->nullableTimestamps();
-//
-//            $table->engine = 'InnoDB';
-//            $table->primary(['user_id', 'role_id']);
-//        });
 
         Schema::create('throttle', function (Blueprint $table) {
             $table->increments('id');
@@ -132,6 +123,7 @@ class MigrationCartalystSentinel extends Migration
         Schema::create('user_positions', function (Blueprint $table) {
             $table->integer('position_id')->unsigned();
             $table->integer('user_id')->unsigned();
+            $table->json('mapped_model_list')->nullable();
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';

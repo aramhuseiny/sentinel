@@ -87,6 +87,12 @@ class SentinelServiceProvider extends ServiceProvider
         $this->publishes([
             $migrations => $this->app->databasePath().'/migrations',
         ], 'migrations');
+
+        //publish middleware
+        $this->publishes([
+            __DIR__.'/../Middleware' => app_path('Http/Middleware'),
+        ]);
+
     }
 
     /**

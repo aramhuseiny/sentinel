@@ -6,9 +6,7 @@ namespace Hedi\Sentinel\SQL;
 
 use Hedi\Sentinel\Models\UserPositions;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Sentinel;
 
@@ -48,11 +46,6 @@ class QueryWrapper
                         else
                             $wrapper_where = $wrapper_where == "" ? " where  ( q.".$pk." = $item )" : $wrapper_where ." or ( q.".$pk." = $item ) ";
                     }
-//                dd(json_decode($model_list));
-//                $items = implode(",", json_decode($model_list));
-//
-//                $wrapper_where = $wrapper_where == "" ? " where  q.".$pk." in ($items)" : $wrapper_where ." or q.".$pk." in ($items)";
-                    Log::info($wrapper_query);
                 }
 
 

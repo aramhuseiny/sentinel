@@ -5,8 +5,8 @@
 [![Latest Version on Packagist][icon-version]][link-packagist]
 [![Total Downloads][icon-downloads]][link-packagist]
 Hedi/Sentinel developed based on Cartalyst/Sentinel to extend its capability to support hierarchical in organizations to add roles of emplyees to their manager.
-This help up to implement organization hierarchy and assign roles to user by their position in the organization.
-In this model, no role will be assigned to users. Role will be assign to position in hierarchy and users place in a position. Implicitly the roles assigned to user. Managers have their employees roles by default.
+This help up to implement organization hierarchy and assign roles to user by their scope in the organization.
+In this model, no role will be assigned to users. Role will be assign to scope in hierarchy and users place in a scope. Implicitly the roles assigned to user. Managers have their employees roles by default.
 
 Sentinel is a PHP 7.3+ framework agnostic fully-featured authentication & authorization system. It also provides additional features such as user roles and additional security features.
 

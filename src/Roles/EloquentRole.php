@@ -20,7 +20,7 @@
 
 namespace Hedi\Sentinel\Roles;
 
-use Hedi\Sentinel\Positions\EloquentPositions;
+use Hedi\Sentinel\Scopes\EloquentScopes;
 use IteratorAggregate;
 use Illuminate\Database\Eloquent\Model;
 use Hedi\Sentinel\Users\EloquentUser;
@@ -61,11 +61,11 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
     ];
 
     /**
-     * The Positions model FQCN.
+     * The Scopes model FQCN.
      *
      * @var string
      */
-    protected static $positionsModel = EloquentPositions::class;
+    protected static $scopesModel = EloquentScopes::class;
 
     /**
      * {@inheritdoc}
@@ -93,9 +93,9 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function positions(): BelongsToMany
+    public function scopes(): BelongsToMany
     {
-        return $this->belongsToMany(static::$positionsModel, 'role_positions', 'role_id', 'position_id')->withTimestamps();
+        return $this->belongsToMany(static::$scopesModel, 'role_scopes', 'role_id', 'scope_id')->withTimestamps();
     }
 
     /**
@@ -146,24 +146,24 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
     /**
      * {@inheritdoc}
      */
-    public function getPositions(): IteratorAggregate
+    public function getScopes(): IteratorAggregate
     {
-        return $this->positions;
+        return $this->scopes;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function getPositionsModel(): string
+    public static function getScopesModel(): string
     {
-        return static::$positionsModel;
+        return static::$scopesModel;
     }
 
     /**
      * {@inheritdoc}
      */
-    public static function setPositionsModel(string $positionsModel): void
+    public static function setScopesModel(string $scopesModel): void
     {
-        static::$positionsModel = $positionsModel;
+        static::$scopesModel = $scopesModel;
     }
 }

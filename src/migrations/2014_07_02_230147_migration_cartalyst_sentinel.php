@@ -74,7 +74,7 @@ class MigrationCartalystSentinel extends Migration
             $table->unique('slug');
         });
 
-        Schema::create('positions', function (Blueprint $table) {
+        Schema::create('scopes', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->integer('parent')->default(0);
@@ -85,13 +85,13 @@ class MigrationCartalystSentinel extends Migration
         });
 
 
-        Schema::create('role_positions', function (Blueprint $table) {
-            $table->integer('position_id')->unsigned();
+        Schema::create('role_scopes', function (Blueprint $table) {
+            $table->integer('scope_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
-            $table->primary(['position_id', 'role_id']);
+            $table->primary(['scope_id', 'role_id']);
         });
 
         Schema::create('throttle', function (Blueprint $table) {
@@ -120,14 +120,14 @@ class MigrationCartalystSentinel extends Migration
         });
 
 
-        Schema::create('user_positions', function (Blueprint $table) {
-            $table->integer('position_id')->unsigned();
+        Schema::create('user_scopes', function (Blueprint $table) {
+            $table->integer('scope_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->json('mapped_model_list')->nullable();
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
-            $table->primary(['position_id', 'user_id']);
+            $table->primary(['scope_id', 'user_id']);
         });
     }
 

@@ -18,25 +18,25 @@
  * @link       https://cartalyst.com
  */
 
-namespace Hedi\Sentinel\Positions;
+namespace Hedi\Sentinel\Scopes;
 
-interface PositionRepositoryInterface
+interface ScopeRepositoryInterface
 {
     /**
      * Finds a role by the given primary key.
      *
      * @param int $id
      *
-     * @return \Hedi\Sentinel\Positions\PositionInterface|null
+     * @return \Hedi\Sentinel\Scopes\ScopeInterface|null
      */
-    public function findById(int $id): ?PositionInterface;
+    public function findById(int $id): ?ScopeInterface;
 
     /**
      * Finds a role by the given name.
      *
      * @param string $name
      *
-     * @return \Hedi\Sentinel\Positions\PositionInterface|null
+     * @return \Hedi\Sentinel\Scopes\ScopeInterface|null
      */
-    public function findByName(string $name): ?PositionInterface;
+    public function findByName(string $name): ?ScopeInterface;
 }

@@ -18,7 +18,7 @@
  * @link       https://cartalyst.com
  */
 
-namespace Hedi\Sentinel\Positions;
+namespace Hedi\Sentinel\Scopes;
 
 use Hedi\Sentinel\Permissions\PermissibleInterface;
 use Hedi\Sentinel\Permissions\PermissionsInterface;
@@ -33,7 +33,7 @@ use Hedi\Sentinel\Users\EloquentUser;
 use Hedi\Sentinel\Permissions\PermissibleTrait;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class EloquentPositions extends Model implements PermissibleInterface, PositionInterface, RoleableInterface
+class EloquentScopes extends Model implements PermissibleInterface, ScopeInterface, RoleableInterface
 {
 
     use PermissibleTrait;
@@ -43,7 +43,7 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
      *
      * @var string
      */
-    protected $table = 'positions';
+    protected $table = 'scopes';
 
     /**
      * The attributes that are mass assignable.
@@ -73,11 +73,11 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
     protected static $rolesModel = EloquentRole::class;
 
     /**
-     * The Positions model FQCN.
+     * The scopes model FQCN.
      *
      * @var string
      */
-    protected static $positionModel = EloquentPositions::class;
+    protected static $scopeModel = EloquentScopes::class;
 
     /**
      * {@inheritdoc}
@@ -98,13 +98,13 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(static::$usersModel, 'user_positions', 'position_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(static::$usersModel, 'user_scopes', 'scope_id', 'user_id')->withTimestamps();
     }
 
     /**
      * {@inheritdoc}
      */
-    public function getPositionId(): int
+    public function getScopeId(): int
     {
         return $this->getKey();
     }
@@ -172,7 +172,7 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(static::$rolesModel, 'role_positions', 'position_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(static::$rolesModel, 'role_scopes', 'scope_id', 'role_id')->withTimestamps();
     }
 
     /**
@@ -215,13 +215,13 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
 
     public function getParent(): HasOne
     {
-        return $this->hasOne( EloquentPositions::$positionModel, 'id', 'parent');
+        return $this->hasOne( EloquentScopes::$scopeModel, 'id', 'parent');
 
     }
 
     protected function createPermissions(): PermissionsInterface
     {
-        $positionPermissions = $this->getPermissions();
+        $scopePermissions = $this->getPermissions();
 
         $rolePermissions = [];
 
@@ -229,6 +229,6 @@ class EloquentPositions extends Model implements PermissibleInterface, PositionI
             $rolePermissions[] = $role->getPermissions();
         }
 
-        return new static::$permissionsClass($positionPermissions, $rolePermissions);
+        return new static::$permissionsClass($scopePermissions, $rolePermissions);
     }
 }

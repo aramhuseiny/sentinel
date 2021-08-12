@@ -28,7 +28,6 @@ use Hedi\Sentinel\Hashing\NativeHasher;
 use Symfony\Component\HttpFoundation\Request;
 use Hedi\Sentinel\Sessions\NativeSession;
 use Hedi\Sentinel\Checkpoints\ThrottleCheckpoint;
-use Hedi\Sentinel\Roles\IlluminatePositionRepository;
 use Hedi\Sentinel\Users\IlluminateUserRepository;
 use Hedi\Sentinel\Checkpoints\ActivationCheckpoint;
 use Hedi\Sentinel\Reminders\IlluminateReminderRepository;
@@ -193,7 +192,7 @@ class SentinelBootstrapper
     /**
      * Creates a role repository.
      *
-     * @return \Hedi\Sentinel\Roles\IlluminatePositionRepository
+     * @return \Hedi\Sentinel\Roles\IlluminateRoleRepository
      */
     protected function createRoles()
     {
@@ -205,7 +204,7 @@ class SentinelBootstrapper
             forward_static_call_array([$users, 'setRolesModel'], [$model]);
         }
 
-        return new IlluminatePositionRepository($model);
+        return new IlluminateRoleRepository($model);
     }
 
     /**

@@ -33,7 +33,7 @@ class IlluminateRoleRepositoryTest extends TestCase
     protected function setUp(): void
     {
         $this->query = m::mock(Builder::class);
-        $this->model = m::mock(EloquentPosition::class);
+        $this->model = m::mock(EloquentRole::class);
         $this->roles = m::mock('Hedi\Sentinel\Roles\IlluminateRoleRepository[createModel]');
         $this->roles->shouldReceive('createModel')->andReturn($this->model);
     }
@@ -50,10 +50,10 @@ class IlluminateRoleRepositoryTest extends TestCase
     public function it_can_be_instantiated()
     {
         $roles = m::mock('Hedi\Sentinel\Roles\IlluminateRoleRepository[createModel]', [
-            EloquentPosition::class,
+            EloquentRole::class,
         ]);
 
-        $this->assertSame(EloquentPosition::class, $roles->getModel());
+        $this->assertSame(EloquentRole::class, $roles->getModel());
     }
 
     /** @test */
@@ -65,7 +65,7 @@ class IlluminateRoleRepositoryTest extends TestCase
 
         $role = $this->roles->findById(1);
 
-        $this->assertInstanceOf(EloquentPosition::class, $role);
+        $this->assertInstanceOf(EloquentRole::class, $role);
     }
 
     /** @test */
@@ -76,7 +76,7 @@ class IlluminateRoleRepositoryTest extends TestCase
         $this->query->shouldReceive('where')->with('slug', 'foo')->andReturnSelf();
         $this->query->shouldReceive('first')->once()->andReturn($this->model);
 
-        $this->assertInstanceOf(EloquentPosition::class, $this->roles->findBySlug('foo'));
+        $this->assertInstanceOf(EloquentRole::class, $this->roles->findBySlug('foo'));
     }
 
     /** @test */
@@ -87,6 +87,6 @@ class IlluminateRoleRepositoryTest extends TestCase
         $this->query->shouldReceive('where')->with('name', 'foo')->andReturnSelf();
         $this->query->shouldReceive('first')->once()->andReturn($this->model);
 
-        $this->assertInstanceOf(EloquentPosition::class, $this->roles->findByName('foo'));
+        $this->assertInstanceOf(EloquentRole::class, $this->roles->findByName('foo'));
     }
 }

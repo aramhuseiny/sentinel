@@ -75,15 +75,15 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | Positions
+    | Scopes
     |--------------------------------------------------------------------------
     |
     | Please provide the role model used in Sentinel.
     |
     */
 
-    'positions' => [
-        'model' => 'Hedi\Sentinel\Positions\EloquentPositions',
+    'scopes' => [
+        'model' => 'Hedi\Sentinel\Scopes\EloquentScopes',
     ],
 
     /*

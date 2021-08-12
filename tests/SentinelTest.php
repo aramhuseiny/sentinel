@@ -20,16 +20,16 @@
 
 namespace Hedi\Sentinel\Tests;
 
+use Hedi\Sentinel\Roles\EloquentRole;
+use Hedi\Sentinel\Roles\RoleRepositoryInterface;
 use Mockery as m;
 use RuntimeException;
 use BadMethodCallException;
 use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 use Hedi\Sentinel\Sentinel;
-use Hedi\Sentinel\Roles\EloquentRole;
 use Hedi\Sentinel\Users\EloquentUser;
 use Illuminate\Contracts\Events\Dispatcher;
-use Hedi\Sentinel\Roles\RoleRepositoryInterface;
 use Hedi\Sentinel\Users\UserRepositoryInterface;
 use Hedi\Sentinel\Activations\ActivationInterface;
 use Hedi\Sentinel\Checkpoints\CheckpointInterface;
@@ -64,7 +64,7 @@ class SentinelTest extends TestCase
     /**
      * The Roles repository instance.
      *
-     * @var \Hedi\Sentinel\Roles\PositionRepositoryInterface
+     * @var \Hedi\Sentinel\Roles\RoleRepositoryInterface
      */
     protected $roles;
 
@@ -91,7 +91,7 @@ class SentinelTest extends TestCase
 
         $this->persistences = m::mock(PersistenceRepositoryInterface::class);
         $this->users        = m::mock(UserRepositoryInterface::class);
-        $this->roles        = m::mock(PositionRepositoryInterface::class);
+        $this->roles        = m::mock(RoleRepositoryInterface::class);
         $this->activations  = m::mock(ActivationRepositoryInterface::class);
         $this->dispatcher   = m::mock(Dispatcher::class);
 
@@ -727,7 +727,7 @@ class SentinelTest extends TestCase
     {
         $this->sentinel->setPersistenceRepository($persistence = m::mock(PersistenceRepositoryInterface::class));
         $this->sentinel->setUserRepository($users = m::mock(UserRepositoryInterface::class));
-        $this->sentinel->setRoleRepository($roles = m::mock(PositionRepositoryInterface::class));
+        $this->sentinel->setRoleRepository($roles = m::mock(RoleRepositoryInterface::class));
         $this->sentinel->setActivationRepository($activations = m::mock(ActivationRepositoryInterface::class));
         $this->sentinel->setReminderRepository($reminders = m::mock(ReminderRepositoryInterface::class));
         $this->sentinel->setThrottleRepository($throttling = m::mock(ThrottleRepositoryInterface::class));
@@ -763,11 +763,11 @@ class SentinelTest extends TestCase
     /** @test */
     public function it_can_pass_method_calls_to_a_role_repository_via_findRoleBy()
     {
-        $this->roles->shouldReceive('findById')->once()->andReturn(m::mock(EloquentPosition::class));
+        $this->roles->shouldReceive('findById')->once()->andReturn(m::mock(EloquentRole::class));
 
         $user = $this->sentinel->findRoleById(1);
 
-        $this->assertInstanceOf(EloquentPosition::class, $user);
+        $this->assertInstanceOf(EloquentRole::class, $user);
     }
 
     /** @test */

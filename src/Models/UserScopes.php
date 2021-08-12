@@ -13,14 +13,14 @@ use Illuminate\Database\Eloquent\Model;
 
  * @package Hedi\Sentinel\Models
  */
-class UserPositions extends Model
+class UserScopes extends Model
 {
-	protected $table = 'user_positions';
-	protected $primaryKey = ['position_id','user_id'];
+	protected $table = 'user_scopes';
+	protected $primaryKey = ['scope_id','user_id'];
 	public $timestamps = false;
 
 	protected $fillable = [
-        'position_id',
+        'scope_id',
         'user_id',
 	    'mapped_model_list'
     ];

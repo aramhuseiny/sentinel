@@ -18,20 +18,20 @@
  * @link       https://cartalyst.com
  */
 
-namespace Hedi\Sentinel\Positions;
+namespace Hedi\Sentinel\Scopes;
 
 use Cartalyst\Support\Traits\RepositoryTrait;
 
-class IlluminatePositionRepository implements PositionRepositoryInterface
+class IlluminateScopeRepository implements ScopeRepositoryInterface
 {
     use RepositoryTrait;
 
     /**
-     * The Eloquent position model FQCN.
+     * The Eloquent scope model FQCN.
      *
      * @var string
      */
-    protected $model = EloquentPositions::class;
+    protected $model = EloquentScopes::class;
 
     /**
      * Create a new Illuminate role repository.
@@ -48,7 +48,7 @@ class IlluminatePositionRepository implements PositionRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findById(int $id): ?PositionInterface
+    public function findById(int $id): ?ScopeInterface
     {
         return $this->createModel()->newQuery()->find($id);
     }
@@ -57,7 +57,7 @@ class IlluminatePositionRepository implements PositionRepositoryInterface
     /**
      * {@inheritdoc}
      */
-    public function findByName(string $name): ?PositionInterface
+    public function findByName(string $name): ?ScopeInterface
     {
         return $this->createModel()->newQuery()->where('name', $name)->first();
     }

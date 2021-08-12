@@ -29,7 +29,7 @@ use InvalidArgumentException;
 use Cartalyst\Support\Traits\EventTrait;
 use Hedi\Sentinel\Users\UserInterface;
 use Illuminate\Contracts\Events\Dispatcher;
-use Hedi\Sentinel\Positions\PositionRepositoryInterface;
+use Hedi\Sentinel\Scopes\ScopeRepositoryInterface;
 use Hedi\Sentinel\Users\UserRepositoryInterface;
 use Hedi\Sentinel\Checkpoints\CheckpointInterface;
 use Hedi\Sentinel\Reminders\ReminderRepositoryInterface;
@@ -63,11 +63,11 @@ class Sentinel
     protected $users;
 
     /**
-     * The Positions repository instance.
+     * The Scopes repository instance.
      *
-     * @var \Hedi\Sentinel\Positions\PositionRepositoryInterface
+     * @var \Hedi\Sentinel\Scopes\ScopeRepositoryInterface
      */
-    protected $positions;
+    protected $scopes;
 
     /**
      * The Roles repository instance.
@@ -135,26 +135,26 @@ class Sentinel
     /**
      * Constructor.
      *
-     * @param \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
-     * @param \Hedi\Sentinel\Users\UserRepositoryInterface               $users
-     * @param \Hedi\Sentinel\Roles\RoleRepositoryInterface               $roles
-     * @param \Hedi\Sentinel\Positions\PositionRepositoryInterface       $positions
-     * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface   $activations
-     * @param \Illuminate\Contracts\Events\Dispatcher                         $dispatcher
+     * @param \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface    $persistences
+     * @param \Hedi\Sentinel\Users\UserRepositoryInterface                  $users
+     * @param \Hedi\Sentinel\Roles\RoleRepositoryInterface                  $roles
+     * @param \Hedi\Sentinel\Scopes\ScopeRepositoryInterface                $scopes
+     * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface      $activations
+     * @param \Illuminate\Contracts\Events\Dispatcher                       $dispatcher
      *
      * @return void
      */
     public function __construct(
         PersistenceRepositoryInterface $persistences,
         UserRepositoryInterface $users,
-        PositionRepositoryInterface $positions,
+        ScopeRepositoryInterface $scopes,
         RoleRepositoryInterface $roles,
         ActivationRepositoryInterface $activations,
         Dispatcher $dispatcher
     ) {
         $this->users = $users;
 
-        $this->positions = $positions;
+        $this->scopes = $scopes;
 
         $this->roles = $roles;
 
@@ -775,25 +775,25 @@ class Sentinel
     }
 
     /**
-     * Returns the position repository.
+     * Returns the scope repository.
      *
-     * @return \Hedi\Sentinel\Positions\PositionRepositoryInterface
+     * @return \Hedi\Sentinel\Scopes\ScopeRepositoryInterface
      */
-    public function getPositionRepository(): PositionRepositoryInterface
+    public function getScopeRepository(): ScopeRepositoryInterface
     {
-        return $this->positions;
+        return $this->scopes;
     }
 
     /**
-     * Sets the position repository.
+     * Sets the scope repository.
      *
-     * @param \Hedi\Sentinel\Positions\PositionRepositoryInterface $positions
+     * @param \Hedi\Sentinel\Scopes\ScopeRepositoryInterface $scopes
      *
      * @return void
      */
-    public function setPositionRepository(PositionRepositoryInterface $positions): void
+    public function setScopeRepository(ScopeRepositoryInterface $scopes): void
     {
-        $this->positions = $positions;
+        $this->scopes = $scopes;
     }
 
     /**
@@ -960,12 +960,12 @@ class Sentinel
             return call_user_func_array([$roles, $method], $parameters);
         }
 
-        if (Str::startsWith($method, 'findPositionBy')) {
-            $positions = $this->getPositionRepository();
+        if (Str::startsWith($method, 'findScopeBy')) {
+            $scopes = $this->getScopeRepository();
 
             $method = 'findBy'.substr($method, 10);
 
-            return call_user_func_array([$positions, $method], $parameters);
+            return call_user_func_array([$scopes, $method], $parameters);
         }
 
         $methods = ['getRoles', 'inRole', 'inAnyRole', 'hasAccess', 'hasAnyAccess'];

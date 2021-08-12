@@ -20,9 +20,9 @@
 
 namespace Hedi\Sentinel\Users;
 
-use Hedi\Sentinel\Positions\EloquentPositions;
-use Hedi\Sentinel\Positions\PositionableInterface;
-use Hedi\Sentinel\Positions\PositionInterface;
+use Hedi\Sentinel\Scopes\EloquentScopes;
+use Hedi\Sentinel\Scopes\ScopeableInterface;
+use Hedi\Sentinel\Scopes\ScopeInterface;
 use Hedi\Sentinel\Roles\RoleableInterface;
 use Illuminate\Database\Eloquent\Collection;
 use IteratorAggregate;
@@ -39,7 +39,7 @@ use Hedi\Sentinel\Persistences\EloquentPersistence;
 use Hedi\Sentinel\Persistences\PersistableInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, PositionableInterface, UserInterface
+class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, ScopeableInterface, UserInterface
 {
     use PermissibleTrait;
 
@@ -99,11 +99,11 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     protected $loginNames = ['email','username'];
 
     /**
-     * The Positions model FQCN.
+     * The Scopes model FQCN.
      *
      * @var string
      */
-    protected static $positionsModel = EloquentPositions::class;
+    protected static $scopesModel = EloquentScopes::class;
 
     /**
      * The Persistences model FQCN.
@@ -168,9 +168,9 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function positions(): BelongsToMany
+    public function scopes(): BelongsToMany
     {
-        return $this->belongsToMany(static::$positionsModel, 'user_positions', 'user_id', 'position_id')->withTimestamps();
+        return $this->belongsToMany(static::$scopesModel, 'user_scopes', 'user_id', 'scope_id')->withTimestamps();
     }
 
     /**
@@ -180,18 +180,18 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      */
     public function roles()
     {
-        $positions_roles = [];
-        $positions = $this->positions;
-        foreach ( $positions as $position)
+        $scopes_roles = [];
+        $scopes = $this->scopes;
+        foreach ( $scopes as $scope)
         {
-            $positions_roles[] = $position->getRoles();
+            $scopes_roles[] = $scope->getRoles();
         }
 
         $roles = [];
-        foreach ( $positions_roles as $position_roles)
+        foreach ( $scopes_roles as $scope_roles)
         {
-            foreach ( $position_roles as $position_role )
-                $roles[] = $position_role;
+            foreach ( $scope_roles as $scope_role )
+                $roles[] = $scope_role;
         }
 
         return collect($roles);
@@ -302,21 +302,21 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      *
      * @return string
      */
-    public static function getPositionsModel(): string
+    public static function getScopesModel(): string
     {
-        return static::$positionsModel;
+        return static::$scopesModel;
     }
 
     /**
      * Sets the roles model.
      *
-     * @param string $positionsModel
+     * @param string $scopesModel
      *
      * @return void
      */
-    public static function setPositionsModel(string $positionsModel): void
+    public static function setScopesModel(string $scopesModel): void
     {
-        static::$positionsModel = $positionsModel;
+        static::$scopesModel = $scopesModel;
     }
 
     /**
@@ -420,7 +420,7 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
             $this->activations()->delete();
             $this->persistences()->delete();
             $this->reminders()->delete();
-            $this->positions()->detach();
+            $this->scopes()->detach();
             $this->throttle()->delete();
         }
 
@@ -459,8 +459,8 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
 
         $rolePermissions = [];
 
-        foreach ( $this->positions as $position){
-            foreach ($position->roles as $role) {
+        foreach ( $this->scopes as $scope){
+            foreach ($scope->roles as $role) {
                 $rolePermissions[] = $role->getPermissions();
             }
         }
@@ -469,24 +469,24 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
         return new static::$permissionsClass($userPermissions, $rolePermissions);
     }
 
-    public function getPositions(): IteratorAggregate
+    public function getScopes(): IteratorAggregate
     {
-        return $this->positions;
+        return $this->scopes;
     }
 
-    public function inPosition($position): bool
+    public function inScope($scope): bool
     {
-        if ($position instanceof PositionInterface) {
-            $positionId = $position->getPositionId();
+        if ($scope instanceof ScopeInterface) {
+            $scopeId = $scope->getScopeId();
         }
 
-        foreach ($this->positions as $instance) {
-            if ($position instanceof PositionInterface) {
-                if ($instance->getPositionId() === $positionId) {
+        foreach ($this->scopes as $instance) {
+            if ($scope instanceof ScopeInterface) {
+                if ($instance->getScopeId() === $scopeId) {
                     return true;
                 }
             } else {
-                if ($instance->getPositionId() == $position) {
+                if ($instance->getScopeId() == $scope) {
                     return true;
                 }
             }
@@ -495,10 +495,10 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
         return false;
     }
 
-    public function inAnyPosition(array $positions): bool
+    public function inAnyScope(array $scopes): bool
     {
-        foreach ($positions as $position) {
-            if ($this->inPosition($position)) {
+        foreach ($scopes as $scope) {
+            if ($this->inScope($scope)) {
                 return true;
             }
         }
@@ -513,11 +513,11 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     public function inRole( $role ) : bool
     {
         $has_role = false;
-        $positions = $this->positions;
+        $scopes = $this->scopes;
 
-        foreach ( $positions as $position)
+        foreach ( $scopes as $scope)
         {
-            $has_role = $position->inRole($role);
+            $has_role = $scope->inRole($role);
             if($has_role == true ) {
                 return true;
             }

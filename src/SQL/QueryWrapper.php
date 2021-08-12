@@ -4,7 +4,7 @@
 namespace Hedi\Sentinel\SQL;
 
 
-use Hedi\Sentinel\Models\UserPositions;
+use Hedi\Sentinel\Models\UserScopes;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
@@ -21,21 +21,21 @@ class QueryWrapper
         $wrapper_where = "";
 
         $user = Sentinel::getUser();
-        $positions = $user->positions;
+        $scopes = $user->scopes;
 
-        foreach ( $positions as $position)
+        foreach ( $scopes as $scope)
         {
-            $model = $position->mapped_model;
+            $model = $scope->mapped_model;
             if( $model != null )
             {
                 $e = new $model;
                 $pk = $e->getKeyName();
 
-                $user_position = UserPositions::where('position_id', '=', $position->id)->where('user_id','=',$user->id)->first();
+                $user_scope = UserScopes::where('scope_id', '=', $scope->id)->where('user_id','=',$user->id)->first();
 
-                if( $user_position != null){
+                if( $user_scope != null){
 
-                    $model_list = $user_position->getAttribute('mapped_model_list');
+                    $model_list = $user_scope->getAttribute('mapped_model_list');
 
                     foreach ( json_decode( $model_list) as $item){
                         echo $item;

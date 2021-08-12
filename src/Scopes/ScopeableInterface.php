@@ -18,39 +18,34 @@
  * @link       https://cartalyst.com
  */
 
-namespace Hedi\Sentinel\Positions;
+namespace Hedi\Sentinel\Scopes;
 
 use IteratorAggregate;
 
-interface PositionInterface
+interface ScopeableInterface
 {
     /**
-     * Returns the role's primary key.
-     *
-     * @return int
-     */
-    public function getPositionId(): int;
-
-    /**
-     * Returns all users for the role.
+     * Returns all the associated roles.
      *
      * @return \IteratorAggregate
      */
-    public function getUsers(): IteratorAggregate;
+    public function getScopes(): IteratorAggregate;
 
     /**
-     * Returns the users model.
+     * Checks if the user is in the given role.
      *
-     * @return string
+     * @param mixed $scope
+     *
+     * @return bool
      */
-    public static function getUsersModel(): string;
+    public function inScope($scope): bool;
 
     /**
-     * Sets the users model.
+     * Checks if the user is in any of the given roles.
      *
-     * @param string $usersModel
+     * @param array $scopes
      *
-     * @return void
+     * @return bool
      */
-    public static function setUsersModel(string $usersModel): void;
+    public function inAnyScope(array $scopes): bool;
 }

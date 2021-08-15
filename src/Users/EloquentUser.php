@@ -176,7 +176,6 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     /**
      * Returns the roles relationship.
      *
-     * @return Collection|\Illuminate\Support\Collection
      */
     public function roles()
     {
@@ -194,7 +193,8 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
                 $roles[] = $scope_role;
         }
 
-        return collect($roles);
+        return Collection::make($roles);
+//        return collect($roles);
     }
 
     /**
@@ -504,6 +504,14 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
         }
 
         return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRoles(): IteratorAggregate
+    {
+        return $this->roles();
     }
 
     /**

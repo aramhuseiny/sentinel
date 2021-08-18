@@ -21,6 +21,7 @@
 namespace Hedi\Sentinel;
 
 use Closure;
+use Hedi\Sentinel\Scopes\ScopeRepositoryInterface;
 use RuntimeException;
 use BadMethodCallException;
 use Illuminate\Support\Str;
@@ -67,6 +68,12 @@ class Sentinel
      * @var \Hedi\Sentinel\Roles\RoleRepositoryInterface
      */
     protected $roles;
+    /**
+     * The Roles repository instance.
+     *
+     * @var \Hedi\Sentinel\Scopes\ScopeRepositoryInterface
+     */
+    protected $scopes;
 
     /**
      * The Activations repository instance.
@@ -130,6 +137,7 @@ class Sentinel
      * @param \Hedi\Sentinel\Persistences\PersistenceRepositoryInterface $persistences
      * @param \Hedi\Sentinel\Users\UserRepositoryInterface               $users
      * @param \Hedi\Sentinel\Roles\RoleRepositoryInterface               $roles
+     * @param \Hedi\Sentinel\Scopes\ScopeRepositoryInterface             $scopes
      * @param \Hedi\Sentinel\Activations\ActivationRepositoryInterface   $activations
      * @param \Illuminate\Contracts\Events\Dispatcher                         $dispatcher
      *
@@ -139,12 +147,15 @@ class Sentinel
         PersistenceRepositoryInterface $persistences,
         UserRepositoryInterface $users,
         RoleRepositoryInterface $roles,
+        ScopeRepositoryInterface $scopes,
         ActivationRepositoryInterface $activations,
         Dispatcher $dispatcher
     ) {
         $this->users = $users;
 
         $this->roles = $roles;
+
+        $this->scopes = $scopes;
 
         $this->dispatcher = $dispatcher;
 
@@ -783,6 +794,30 @@ class Sentinel
         $this->roles = $roles;
     }
 
+
+
+    /**
+     * Returns the scope repository.
+     *
+     * @return \Hedi\Sentinel\Scopes\ScopeRepositoryInterface
+     */
+    public function getScopeRepository(): ScopeRepositoryInterface
+    {
+        return $this->scopes;
+    }
+
+    /**
+     * Sets the role repository.
+     *
+     * @param \Hedi\Sentinel\Scopes\ScopeRepositoryInterface $scopes
+     *
+     * @return void
+     */
+    public function setScopeRepository(ScopeRepositoryInterface $scopes): void
+    {
+        $this->scopes = $scopes;
+    }
+
     /**
      * Returns the persistences repository.
      *
@@ -925,7 +960,15 @@ class Sentinel
             return call_user_func_array([$roles, $method], $parameters);
         }
 
-        $methods = ['getRoles', 'inRole', 'inAnyRole', 'hasAccess', 'hasAnyAccess'];
+        if (Str::startsWith($method, 'findScopeBy')) {
+            $scopes = $this->getScopeRepository();
+
+            $method = 'findBy'.substr($method, 11);
+
+            return call_user_func_array([$scopes, $method], $parameters);
+        }
+
+        $methods = ['getScopes', 'inScope', 'inAnyScope', 'getRoles', 'inRole', 'inAnyRole', 'hasAccess', 'hasAnyAccess'];
 
         $className = get_class($this);
 

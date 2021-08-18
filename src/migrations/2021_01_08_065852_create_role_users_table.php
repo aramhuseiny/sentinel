@@ -17,8 +17,8 @@ class CreateRoleUsersTable extends Migration
             $table->integer('id', true)->unsigned();
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
-            $table->integer('scope_id')->unsigned();
-            $table->json('values')->unsigned();
+            $table->integer('scope_id')->unsigned()->nullable()->default(null);
+            $table->json('values')->nullable()->default(null);
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';

@@ -20,6 +20,9 @@
 
 namespace Hedi\Sentinel\Users;
 
+use Hedi\Sentinel\Scopes\EloquentScope;
+use Hedi\Sentinel\Scopes\ScopeableInterface;
+use Hedi\Sentinel\Scopes\ScopeInterface;
 use IteratorAggregate;
 use Illuminate\Support\Str;
 use Illuminate\Database\Eloquent\Model;
@@ -37,7 +40,7 @@ use Hedi\Sentinel\Persistences\EloquentPersistence;
 use Hedi\Sentinel\Persistences\PersistableInterface;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 
-class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, RoleableInterface, UserInterface
+class EloquentUser extends Model implements PermissibleInterface, PersistableInterface, RoleableInterface, UserInterface, ScopeableInterface
 {
     use PermissibleTrait;
 
@@ -100,6 +103,13 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      * @var string
      */
     protected static $rolesModel = EloquentRole::class;
+
+    /**
+     * The Scopes model FQCN.
+     *
+     * @var string
+     */
+    protected static $scopesModel = EloquentScope::class;
 
     /**
      * The Persistences model FQCN.
@@ -170,6 +180,16 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     }
 
     /**
+     * Returns the scopes relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function scopes(): BelongsToMany
+    {
+        return $this->belongsToMany(static::$scopesModel, 'role_users', 'user_id', 'scope_id')->withTimestamps();
+    }
+
+    /**
      * Returns the throttle relationship.
      *
      * @return \Illuminate\Database\Eloquent\Relations\HasMany
@@ -200,6 +220,14 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     /**
      * {@inheritdoc}
      */
+    public function getScopes(): IteratorAggregate
+    {
+        return $this->scopes;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function inRole($role): bool
     {
         if ($role instanceof RoleInterface) {
@@ -224,10 +252,48 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
     /**
      * {@inheritdoc}
      */
+    public function inScope($scope): bool
+    {
+        if ($scope instanceof ScopeInterface) {
+            $scopeId = $scope->getScopeId();
+        }
+
+        foreach ($this->scopes as $instance) {
+            if ($scope instanceof ScopeInterface) {
+                if ($instance->getScopeId() === $scopeId) {
+                    return true;
+                }
+            } else {
+                if ($instance->getScopeId() == $scope || $instance->getScopeSlug() == $scope) {
+                    return true;
+                }
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function inAnyRole(array $roles): bool
     {
         foreach ($roles as $role) {
             if ($this->inRole($role)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function inAnyScope(array $scopes): bool
+    {
+        foreach ($scopes as $scope) {
+            if ($this->inScope($scope)) {
                 return true;
             }
         }

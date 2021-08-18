@@ -18,7 +18,7 @@ class CreateScopesTable extends Migration
             $table->string('slug');
             $table->string('name');
             $table->string('model_class');
-            $table->text('mapped_model_active')->nullable();
+            $table->text('scope_active')->nullable();
             $table->timestamps();
 
             $table->engine = 'InnoDB';

@@ -963,7 +963,7 @@ class Sentinel
         if (Str::startsWith($method, 'findScopeBy')) {
             $scopes = $this->getScopeRepository();
 
-            $method = 'findBy'.substr($method, 10);
+            $method = 'findBy'.substr($method, 11);
 
             return call_user_func_array([$scopes, $method], $parameters);
         }

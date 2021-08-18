@@ -86,12 +86,12 @@ class MigrationCartalystSentinel extends Migration
 
 
         Schema::create('role_scopes', function (Blueprint $table) {
+            $table->integer('id', true)->unsigned();
             $table->integer('scope_id')->unsigned();
             $table->integer('role_id')->unsigned();
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
-            $table->primary(['scope_id', 'role_id']);
         });
 
         Schema::create('throttle', function (Blueprint $table) {
@@ -121,13 +121,13 @@ class MigrationCartalystSentinel extends Migration
 
 
         Schema::create('user_scopes', function (Blueprint $table) {
+            $table->integer('id', true)->unsigned();
             $table->integer('scope_id')->unsigned();
             $table->integer('user_id')->unsigned();
             $table->json('mapped_model_list')->nullable();
             $table->nullableTimestamps();
 
             $table->engine = 'InnoDB';
-            $table->primary(['scope_id', 'user_id']);
         });
     }
 

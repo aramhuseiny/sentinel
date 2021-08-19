@@ -88,7 +88,8 @@ class EloquentScope extends Model implements ScopeInterface
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(static::$usersModel, 'role_users', 'scope_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(static::$usersModel, 'role_users', 'scope_id', 'user_id')
+            ->withPivot('role_id', 'scope_values')->withTimestamps();
     }
 
     /**
@@ -98,7 +99,8 @@ class EloquentScope extends Model implements ScopeInterface
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(static::$rolesModel, 'role_users', 'scope_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(static::$rolesModel, 'role_users', 'scope_id', 'role_id')
+            ->withPivot('user_id', 'scope_values')->withTimestamps();
     }
 
     /**

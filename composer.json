@@ -56,7 +56,7 @@
         },
         "laravel": {
             "providers": [
-                "Cartalyst\\Sentinel\\Laravel\\SentinelServiceProvider"
+                "Hedi\\Sentinel\\Laravel\\SentinelServiceProvider"
             ],
             "aliases": {
                 "Activation": "Hedi\\Sentinel\\Laravel\\Facades\\Activation",

@@ -178,7 +178,8 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      */
     public function roles(): BelongsToMany
     {
-        return $this->belongsToMany(static::$rolesModel, 'role_users', 'user_id', 'role_id')->withTimestamps();
+        return $this->belongsToMany(static::$rolesModel, 'role_users', 'user_id', 'role_id')
+            ->withPivot('scope_id', 'scope_values')->withTimestamps();
     }
 
     /**
@@ -188,7 +189,8 @@ class EloquentUser extends Model implements PermissibleInterface, PersistableInt
      */
     public function scopes(): BelongsToMany
     {
-        return $this->belongsToMany(static::$scopesModel, 'role_users', 'user_id', 'scope_id')->withTimestamps();
+        return $this->belongsToMany(static::$scopesModel, 'role_users', 'user_id', 'scope_id')
+            ->withPivot('role_id', 'scope_values')->withTimestamps();
     }
 
     /**

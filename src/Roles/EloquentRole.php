@@ -20,6 +20,7 @@
 
 namespace Hedi\Sentinel\Roles;
 
+use Hedi\Sentinel\Scopes\EloquentScope;
 use IteratorAggregate;
 use Illuminate\Database\Eloquent\Model;
 use Hedi\Sentinel\Users\EloquentUser;
@@ -66,6 +67,9 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
      */
     protected static $usersModel = EloquentUser::class;
 
+
+    protected static $scopesModel = EloquentScope::class;
+
     /**
      * {@inheritdoc}
      */
@@ -85,7 +89,19 @@ class EloquentRole extends Model implements PermissibleInterface, RoleInterface
      */
     public function users(): BelongsToMany
     {
-        return $this->belongsToMany(static::$usersModel, 'role_users', 'role_id', 'user_id')->withTimestamps();
+        return $this->belongsToMany(static::$usersModel, 'role_users', 'role_id', 'user_id')
+            ->withPivot('scope_id', 'scope_values')->withTimestamps();
+    }
+
+    /**
+     * The Scopes relationship.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function scopes(): BelongsToMany
+    {
+        return $this->belongsToMany(static::$scopesModel, 'role_users', 'role_id', 'scope_id')
+            ->withPivot('user_id', 'scope_values')->withTimestamps();
     }
 
     /**

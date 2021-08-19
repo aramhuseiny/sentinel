@@ -21,6 +21,7 @@
 namespace Hedi\Sentinel\Laravel;
 
 use Exception;
+use Hedi\Sentinel\Scopes\IlluminateScopeRepository;
 use InvalidArgumentException;
 use Hedi\Sentinel\Sentinel;
 use Illuminate\Support\ServiceProvider;
@@ -57,6 +58,7 @@ class SentinelServiceProvider extends ServiceProvider
         $this->registerPersistences();
         $this->registerUsers();
         $this->registerRoles();
+        $this->registerScopes();
         $this->registerCheckpoints();
         $this->registerReminders();
         $this->registerSentinel();
@@ -183,6 +185,20 @@ class SentinelServiceProvider extends ServiceProvider
             $config = $app['config']->get('cartalyst.sentinel.roles');
 
             return new IlluminateRoleRepository($config['model']);
+        });
+    }
+
+    /**
+     * Registers the roles.
+     *
+     * @return void
+     */
+    protected function registerScopes()
+    {
+        $this->app->singleton('sentinel.scopes', function ($app) {
+            $config = $app['config']->get('cartalyst.sentinel.scopes');
+
+            return new IlluminateScopeRepository($config['model']);
         });
     }
 
@@ -320,6 +336,7 @@ class SentinelServiceProvider extends ServiceProvider
                 $app['sentinel.persistence'],
                 $app['sentinel.users'],
                 $app['sentinel.roles'],
+                $app['sentinel.scopes'],
                 $app['sentinel.activations'],
                 $app['events']
             );

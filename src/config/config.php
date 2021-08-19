@@ -52,6 +52,7 @@ return [
 
     'users' => [
         'model' => 'Hedi\Sentinel\Users\EloquentUser',
+        'login_names'   => explode(',', env('LOGIN_NAMES', 'email,login_name'))
     ],
 
     /*
@@ -65,6 +66,19 @@ return [
 
     'roles' => [
         'model' => 'Hedi\Sentinel\Roles\EloquentRole',
+    ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Scopes
+    |--------------------------------------------------------------------------
+    |
+    | Please provide the role model used in Sentinel.
+    |
+    */
+
+    'scopes' => [
+        'model' => 'Hedi\Sentinel\Scopes\EloquentScope',
     ],
 
     /*

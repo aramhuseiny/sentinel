@@ -736,6 +736,11 @@ class Sentinel
         return $this->user;
     }
 
+    public function user()
+    {
+        return Sentinel::getUser();
+    }
+
     /**
      * Sets the user associated with Sentinel (does not log in).
      *

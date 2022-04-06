@@ -11,10 +11,10 @@
  * bundled with this package in the LICENSE file.
  *
  * @package    Sentinel
- * @version    5.1.0
+ * @version    6.0.0
  * @author     Cartalyst LLC
  * @license    BSD License (3-clause)
- * @copyright  (c) 2011-2020, Cartalyst LLC
+ * @copyright  (c) 2011-2022, Cartalyst LLC
  * @link       https://cartalyst.com
  */
 
@@ -65,7 +65,7 @@ class ConfigRepository implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetExists($key)
+    public function offsetExists($key): bool
     {
         return isset($this->config[$key]);
     }
@@ -73,7 +73,7 @@ class ConfigRepository implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetGet($key)
+    public function offsetGet($key): mixed
     {
         return $this->config[$key];
     }
@@ -81,7 +81,7 @@ class ConfigRepository implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetSet($key, $value)
+    public function offsetSet($key, $value): void
     {
         $this->config[$key] = $value;
     }
@@ -89,7 +89,7 @@ class ConfigRepository implements ArrayAccess
     /**
      * {@inheritdoc}
      */
-    public function offsetUnset($key)
+    public function offsetUnset($key): void
     {
         unset($this->config[$key]);
     }

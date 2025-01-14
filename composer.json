@@ -21,7 +21,7 @@
     },
     "require-dev": {
         "cartalyst/php-cs-fixer-config": "^2.0",
-        "/cookie": "^9.0",
+        "illuminate/cookie": "^11.0",
         "illuminate/database": "^11.0",
         "illuminate/events": "^11.0",
         "illuminate/http": "^11.0",
